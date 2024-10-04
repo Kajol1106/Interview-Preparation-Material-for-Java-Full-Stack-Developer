@@ -1,0 +1,43 @@
+Log4j :
+========
+1. Logging : getting messages from application (Production server) like success, errors, warnings,..etc
+2. Moniter the process, find bugs from realtime environment.
+3. Tools : Log4J 2.x, Java Logging, Commons Logging ..etc
+4. Log Messages can be stored at different places ex., Files, Database, Email , Console..etc
+
+Components
+==========
+Logger : (which classes) it is a base object in Log4J. It enables/activates Logging/Moniter of a class/process.
+class EmployeeController {
+   Logger log = LogManager.getLogger(EmployeeController.class);
+}
+
+- Do not create Logger object for Entity/DTO/POJO classes.
+- Recomanded use in Controllers/Services..etc
+
+Priority Methods :
+=================
+These are pre-defined methods exist in Logger object which prints messages based on type.
+1. TRACE : To find messages from multiple stages/env/apps.
+2. DEBUG : To print final result of a process/ internal details
+3. INFO : Current Step
+4. WARN : App related messages
+5. ERROR : To give details about exception
+6. FATAL : Environment related issues ex:Database Connection is closed.
+
+TRACE > DEBUG > INFO > WARN > ERROR > FATAL
+
+Appender:- Location of messages to be stored. (classes). (where to store) Do not create Logger object for Entity/DTO/POJO classes.
+FileAppender : Write data to Log File (___.log)
+ConsoleAppender : Prints data at console
+JDBCAppender : Store messages at Database table
+SMTPAppender : Write messages to Email.
+
+Project can have even multiple appenders.
+
+Layout: (how to print) Message Format/Pattern.
+
+Default Layout (Message and NextLine)
+HTML Layout (___.html)
+XML Layout (___.xml)
+PatternLayout (Your own format)
