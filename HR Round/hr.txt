@@ -1,0 +1,76 @@
+Intoduction ?
+
+Hello, I'm Kajol Kolagir from Pune. 
+I hold a Bachelor's degree in Computer Applications, 
+which I completed in 2021 from the College of Computer Science and Information Technology, Latur. 
+My passion for understanding how programs work in real life inspired me to pursue this field.
+
+To further enhance my skills, I completed a 30-week full stack web development course at Masai School, 
+where I gained hands-on experience with both front-end and back-end technologies.
+
+Following this, I joined Clayfin Pvt Ltd,  where I was trained for 1 and half month and then worked on their main project. 
+My role primarily focused on backend development, resolving production issues, and supporting the deployment process during product releases,
+and connecting with clients to address any issues or provide explanations as needed.
+
+In my free time, I enjoy creating and sharing videos on YouTube about my professional development.
+
+====================================================================================================================================================
+
+What are your career Objectives? / Where do you see yourself in 5 years?
+
+I am a detail-oriented and analytical person who is always eager to learn and improve. 
+I actively seek opportunities to expand my knowledge through training sessions, industry seminars, 
+and staying up to date with the latest trends and technologies in my field.
+
+In the next five years, I aim to grow into a senior technical position, 
+where I can take on more responsibility, mentor junior staff, and contribute to the success of larger projects. 
+My goal is to become a trusted expert within the company, known for solving complex problems 
+and handling critical challenges with confidence. Ultimately, I would like to be recognized 
+as a key contributor to the technical team and help the company achieve its goals.
+
+========================================================================================================================================================
+
+Why should we hire you? / Why do you think you are eligible for this job? 
+
+First, I am a detail-oriented and analytical person, and this job aligns with my skills. 
+
+I completed a 9-month, full-time course that prepared me well for this role. 
+The course followed a 9 AM to 9 PM schedule, with daily tasks and assignments, which helped me build strong 
+time management skills and get used to working long hours—similar to a real job.
+
+I also have 1.3 years of experience as a Java Developer at Clayfin Pvt Ltd where I worked on thier main project. 
+There, I worked on backend development, resolved production issues, supported deployment process during product releases, 
+and connected with clients to handle their concerns and provided the solutions as needed.
+
+In addition, I have a Bachelor's degree in Computer Applications, which gave me a solid foundation in IT. 
+This background allows me to quickly learn and adapt to new skills.
+
+These experiences make me a strong candidate for this role.
+
+=========================================================================================================================================
+
+Why You left the previous company ?
+
+I decided to leave my previous company because I was on the bench for about 15 days, 
+and the current project no longer required additional resources. I felt that it was a good time for me 
+to seek new challenges and opportunities where I could continue to grow and develop my skills. 
+I’m eager to contribute to a dynamic team and take on responsibilities that will allow me to make a meaningful impact.
+
+=====================================================================================================================================
+
+Rate yourself for Java from 1 to 10 scale ?
+
+I would rate my Java skills as a 7 out of 10. 
+I'm comfortable with most advanced concepts, can work independently on complex projects, 
+However, there's always more to learn, especially in areas like JVM internals, 
+and I am continually keeping up to date to improve my skill.
+
+====================================================================================================================================
+
+Rate yourself for SpringBoot from 1 to 10 scale ?
+
+I would rate my Spring Boot skills as a 7 out of 10. 
+I'm good to implementing RESTful APIs, 
+and utilizing Spring Boot's various features like Spring Data JPA, security.  
+However, I recognize that there's always more to learn, especially in areas like advanced configuration, 
+custom annotations, and optimizing performance for high-traffic applications.
