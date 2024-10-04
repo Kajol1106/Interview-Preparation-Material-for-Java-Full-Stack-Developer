@@ -1,0 +1,58 @@
+Daemon Thread :
+    (dusare thread ke background mein run hote hai and other thread ko service provide karate hai)
+
+    1) Defination : Which thread run in the background of another thread thatthread is called as daemon thread
+
+    2) Use : It provides service to the other threads.
+
+    3) Example : Garbage collector, finalizer, Attach Listener, signale dispatcher, spelling checker
+        (garbage collector main thread ko memory full ho gai to waste object ko delete karake memory provide karata hai).
+
+    4) Methods :
+        1. public final void setDaemon(boolean b)
+        2. public final boolean isDaemon()
+
+    5) Program : 
+public class DaemonThread extends Thread {
+	@Override
+	public void run() {
+//		if(Thread.currentThread().isDaemon()) {
+//			System.out.println("Daemon thread...");
+//		}
+//		else {
+//			System.out.println("Child thread(not daemon thread) ...");
+//		}
+		
+		System.out.println("daemon thread...");
+	}
+
+	public static void main(String[] args) {
+		
+		//Thread.currentThread().setDaemon(true);	//it's not possible. It will throw error
+		//because main thread already started the thread. It will trow exception illegal
+		
+		System.out.println("Main thread ...");
+		
+		DaemonThread t1 = new DaemonThread();
+		t1.setDaemon(true);
+		t1.start();
+
+	}
+
+}
+
+        case-1 : we have to create Daemon thread before starting the thread 
+        If we create Daemon thread after starting it, it will throw 
+        run time exception i.e. IllegalThreadException
+
+        case-2 : we cannot create main thread as Daemon thread.
+
+    6) Life : It's life depend on another thread.
+
+    7) Nature or Properties : It inherits the properties from his parent thread.
+
+    8) JVM role in Daemon Thread :
+        sab thread run hokar dead state mein chale gai and wahan par agar daemon thread hoga to JVM us thread ko kill or dead state mein 
+        lekar jayega and shut down ho jayega.
+
+    9) Most of the times, Daemon threads has low priority but we can change it's priority according to our need.    

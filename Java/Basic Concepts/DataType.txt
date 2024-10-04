@@ -1,0 +1,40 @@
+Data Types : 
+============
+
+Defination : The type of data that we stored in the variable is known as data type. 
+for ex., int a = 0; char c = 'a'; String name = "kaju";
+
+- There are two types of data types : 
+1) Primitive :
+    - Primitive types are the most basic data types available within the java language
+    - The size is fixed
+    - there are 8 types of primitive data types are boolean, byte, char, short, int, float, long, double
+    - ex,. int a = 10 or int a = 1000; in this case int data type will take 4 byte of memory.
+
+2) Non-Primitive : 
+    - Non-Primitive data types are derived from primitive data types.
+    - size is not fixed.
+    - some non-primitive data types are String, array, class, structures, unions etc.
+
+
+Difference between primitive and not-primitive data types :
+----------------------------------------------------------------------
+
+1) The size of primitive is fixed i.e, if we declare int a=10, or int a=10000 in both cases int data type will take 4 byte of memory.
+- but the size of non-primitive data type is not fixed for eg., int[
+ a = new int[3] in this case array will take 12 byte but if we declare int[a] = new int[4] in this case array will take 16 byte of memory thus
+ size of array is not fixed.
+
+2) Primitive data type are building blocks but non-primitive data types are derived from primitive data types.
+
+According to Data types, languages can be divided into two categories :
+-------------------------------------------------------------------------
+
+1. Statically typed language :
+    In this type of languages, each variable and expression type is allready known at compile time. Once a variable is declared
+    to be of a certain data type, it cannot hold values of other data types. for ex., c, c++, java, FORTRAN, pascal etc.
+
+2. Dynamically typed language :
+    In this type of languages we need not to specify the type of data or variable, it is automatically checked during run-time.
+    for ex., Objective-C, PHP, Python, JavaScript.
+

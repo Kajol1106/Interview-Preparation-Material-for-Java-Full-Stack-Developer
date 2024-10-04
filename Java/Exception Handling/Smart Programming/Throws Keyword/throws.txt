@@ -1,0 +1,88 @@
+Throws Keyword :
+
+1. Keywords Working :
+    - try : In try block we can write statements that can throw exception i.e. it mentains risky code.
+    - catch : It mentains exception handling code. i.e. alternative way for exception.
+    - finally : It mentains clean up code i.e. closing the resources.
+    - throw : It creates exception object manually (by programmer) and handover to JVM.
+    - throws : It is used to declare the exception. It gives an information to the caller 
+    method that there may occur an exception so it is better for the caller method to provide 
+    the exception handling code so that normal flow can be maintained.
+
+2. If we call a method that declares an exception, we must either caught the exception using try 
+catch block or declare the exception using throws keyword or say If thee is any checked exceptions, 
+we will get compile time error saying "unreported exception XXX must be caught or declared to be thrown".
+To prevent this compile time we can handle the exception in two ways :
+1) using try catch 2) By using throws keyword.
+
+3. throws keyword used to declare the checked exceptions only. If there occurs any unchecked exception 
+such as NullPointerException, it is programmers fault that he is not performing check up before the code being used.
+
+
+
+Throws keywod in java is used to declare an exception. It is gives an information to the caller 
+method that there may occur an exception so it is betterr for the caller method to provide the 
+exception handling code so that normal flow can be maintained. If any exception occurs in the 
+program in any method then if programmer wants that the another programmer or method should handle 
+that particular exception in its own way so throws keyword is used with method with the exception name.
+
+Note : Throws keyword is used to declare only for the checked exception such as NullPointerException, 
+it is programmers faluts that he is not performing check up before the code being used. 
+
+Working : 
+
+program 1 :
+methodName() throws Exception name {
+
+}
+
+progam 2 with main method :
+public static void main(String[] args) {
+    try {
+        //code here methodName() is called
+    }
+    catch (Exception e) {
+        System.out.println(e);
+    }
+}
+
+Exception is thrown to caller method which is main method and it will handle this exception in its own way.
+
+
+Example : 
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+public class ReadWrite extends RuntimeException{
+	void readFile() throws FileNotFoundException {
+		FileInputStream fis = new FileInputStream("abc.txt");
+	}
+	
+	void saveFile() throws FileNotFoundException {
+		String text = "This is demo";
+		FileOutputStream fos = new FileOutputStream("xyz.txt");
+	}
+}
+
+import java.io.FileNotFoundException;
+public class Text {
+
+	public static void main(String[] args) {
+		ReadWrite rw = new ReadWrite();
+		try {
+			rw.readFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			rw.saveFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Is exeption handling working or not ");
+	}
+
+}

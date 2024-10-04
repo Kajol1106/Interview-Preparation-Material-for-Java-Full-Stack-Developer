@@ -1,0 +1,6 @@
+Stream API :
+- These streams are related to Collection frameworks. These streams are very different from io stream,
+io streams are the sequence of data.
+- introduced in 1.8 version
+- basically perform bulk operations and process the objects of collection
+- reduced the code length

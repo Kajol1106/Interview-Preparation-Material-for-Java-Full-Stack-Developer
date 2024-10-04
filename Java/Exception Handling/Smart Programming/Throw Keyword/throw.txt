@@ -1,0 +1,67 @@
+Throw Keyword :
+
+1. Keywords Working :
+    - try : In try block we can write statements that can throw exception i.e. it mentains risky code.
+    - catch : It mentains exception handling code. i.e. alternative way for exception.
+    - finally : It mentains clean up code i.e. closing the resources.
+    - throw : It creates exception object manually (by programmer) and handover to JVM.
+
+2. We can throw either checked or unchecked exceptions but throw is best for customized exception.
+
+3. We can only throw class that comes in throwable child class.
+
+4. We cannot write any statement after throw, otherwise it will provide unreachable statement error.
+
+    The throw keyword in java is mainly used in case of custom exception. It is used to expliciti throw an exception.
+    We can throw both unchecked and checked exception. In the case of throw keyword programmer throw the exception by
+    it own.
+
+    -> Default working of exception : 
+
+public class Test {
+	public static void main(String[] args) {
+		int a = 100;
+        int b = 0;
+        int c = a/b;
+        System.out.println(c);
+	}
+}
+
+In the above example ,
+1) Main method generate Exception Object (It includers Exception name, Description, Stack Trace)
+2) JVM passes the exception object to Default Exception Handler, if exception is not handled by main() method.
+3) Default Exception Handler will print the exception object.
+This is how Exception works if it occurs.
+
+
+The block or method in which an exception occurs it passes the exception object to JVM but in case
+of throw keyword programmer itself create exception object and passes to JVM. This is done according 
+to project or conditions. 
+
+Example : 
+
+Suppose we have a project of voting which should throw an exception if the age of voter is less than 
+18. So here custom exception is needed thats why throw keyword is used and programmer create object 
+of exception in this scenario and pass this to JVM and exception is printed by default exception handler.
+
+public class YoungerAgeException extends Runtime {
+
+	public YoungerAgeException(String msg) {
+		super(msg);
+	}
+	
+}
+
+public class Voting {
+
+	public static void main(String[] args) {
+		int age = 19;
+		if(age < 18) {
+			throw new YoungerAgeException("You are not eligible for voting");
+		}
+		else {
+			System.out.println("You can vote successfully");
+		}
+	}
+
+}

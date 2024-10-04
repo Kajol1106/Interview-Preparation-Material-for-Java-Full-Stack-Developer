@@ -1,0 +1,17 @@
+Difference between Exception and Error :
+
+    Object class is the parent class of all classes in java and Throwable class is the parent 
+class of the Exception and Error class in java.
+
+Exception :
+1) Exception occurs because of our programs.
+2) Exception are recoverable i.e. programmer can handle them using try-catch block.
+3) Exceptions are of two types :
+    i) Compile time exceptions or checked exceptions.
+    ii) Runtime exceptions or unchecked exceptions.
+
+Error : 
+1) Eroors occurs because of lack of system resources.
+2) Errors are not recoverable i.e. programmer can't handle them to their level.
+3) Errors are of one type :
+    ii) Runtime exceptions or unchecked exceptions.

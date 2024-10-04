@@ -1,0 +1,21 @@
+===============================
+Durga Sir : (1.8 imp features)
+===============================
+1) lambda expression
+2) functional interfaces
+3) default methods
+4) predefined functional interfaces
+    1. Predicates
+    2. Functions
+    3. Supplier
+    4. Consumer
+5) Double colon operator (::)
+(Constructor and method references)
+7) Stream API
+8) Date and Time API(Joda Time API)
+
+
+Main intention of 1.8 :
+- To simplify programming
+- To utilize funcational programming
+- to enable parallel programming

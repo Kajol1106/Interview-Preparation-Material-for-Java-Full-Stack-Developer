@@ -1,0 +1,58 @@
+Keywords in java :
+=====================
+
+Defination : Keywords are the predefined words having any specific meaning. These keywords cannot be used as a variable name or class
+name or interface name or method name or object name.
+
+Note : true, false and null are values so they are not keywords but they also cannot be used as a variable name or class name
+or interface name or method name or object name.
+
+abstract
+assert
+boolean
+break
+byte
+case
+catch
+char
+class
+super
+continue
+defualt
+do
+double
+else
+enum
+extends
+final
+finally
+float
+for
+while
+if
+implements
+import
+instanceof
+int
+interface
+long
+native
+new
+package
+private
+protected
+public
+return
+short
+static
+strictfp
+switch
+synchronized
+this
+throw
+throws
+transient
+try
+void
+volatile.
+

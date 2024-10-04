@@ -1,0 +1,7 @@
+The interface which contain single abstract methods is called as function interface
+for ex.,
+Runnable ==> run()
+Comparable ==> compareTo()
+Comparator ==> compare()
+ActionListener ==> actionPerformed()
+Callable ==> call()

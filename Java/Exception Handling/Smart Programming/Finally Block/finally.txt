@@ -1,0 +1,33 @@
+Finally Block :
+
+Finally block is a block which is followed by the try and catch block. This block will always gets executed whether 
+any exception occur or not. The finally block has important code like closing connection code or stream etc.
+
+Flow of finally block example :
+ try {
+    //file open code;
+    //read/write code;
+ } catch (Exception e) {
+    //handling code or statement
+ }
+ finally {
+    // cleanup code 
+ }
+
+ - If any exception occure then first try block will execute then catch block will execute then after that 
+ finally block will execute.
+ - when no exception occure finally block will execute directyly afterr try block and catch block will not execute.
+
+
+ Certain points about finally block :
+    - We can use multiple catch blocks with one try block but we can only use single finally block with one 
+    try block, not multiple.
+    - The statements present in the finally block execute even if the try block contains control transfer statements
+    (i.e. jump statements break or return) like return, break or continue.
+
+
+The possibilities that disturbs the execution of finally block like 
+    - Using of the System.exit() method.
+    - Causing a fatal errror that causes the process to abort.
+    - The death of a thread.
+    - Due to an exception arising in finally block.

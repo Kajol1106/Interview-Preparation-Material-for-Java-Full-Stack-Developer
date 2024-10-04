@@ -1,0 +1,9 @@
+customized or user-defined Exception
+
+Defination : If we are creating our own exception that is known as custome exception or user-defined exception.
+java custom exception are used to customize the exception according to user need. By creating custom exception we 
+can create our own exception and messages.
+
+Customized exception are of two type :
+1. checked customized exception. 
+2. unchecked customized exception. 

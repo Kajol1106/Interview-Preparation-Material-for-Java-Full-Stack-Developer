@@ -1,0 +1,61 @@
+Date and Time API is also know as Joda Time API. (developed by joda.org)
+
+Current System date :
+=====================
+
+	LocalDate date = LocalDate.now();
+
+
+Current system Local Time : 
+===========================
+
+	LocalTime time = LocalTime.now();
+
+it present in java.time.* package.
+
+
+Current Local Date and Time :
+=============================
+
+	LocalDateTime ldt = LocalDateTime.now();
+
+
+Not for local or system current date and time : 
+================================================
+
+LocalDateTime ldt = LocalDateTime of(based on your requirement you can pass argument here);
+
+ex., you want to represent 
+1995, May, 02 12:45
+LocalDateTime ldt = LocalDateTime of(1995, 05 or month.May, 02, 12,45);
+
+
+
+Period :
+=========
+
+- Period class is also present in date and time API.
+
+LocalDate dob = LocalDate.of(1998, 06, 11);
+LocalDate today = LocalDate.now();
+Period p = Period.between(dob, today);
+System.out.printf("Your age is %d years %d months and %d days", p.getYears(), p.getMonths(), p.getDays());
+Output : Your age is 24 Years 6 Months 18 days
+
+
+Year : 
+=========
+
+- Year class is also present in date and time API
+
+
+ZoneID : 
+=========
+
+- This class is used to Zone
+ZoneId zone = ZoneId.systemDefault();
+System.out.println("Current zone is : "+zone);
+//Output : Current zone is : Asia/Calcutta
+
+
+ 

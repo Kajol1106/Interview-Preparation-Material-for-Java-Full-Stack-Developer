@@ -1,0 +1,61 @@
+1) Performing single task from single thread : 
+===============================================
+public class Main extends Thread {
+	@Override
+	public void run() {
+		System.out.println("Thread using thread class ");
+	}
+
+	public static void main(String[] args) {    //main method is also a thread by default
+		Main m1 = new Main();
+		m1.start();
+	}
+}
+
+
+2) Performing Single task from multiple Thread : 
+===============================================
+public class Main extends Thread {
+	@Override
+	public void run() {
+		System.out.println("Thread using thread class ");
+	}
+
+	public static void main(String[] args) {
+		Main m1 = new Main();
+		m1.start();
+		
+		Main m2 = new Main();
+		m2.start();
+	}
+}
+
+
+3) Performing multiple task from multiple thread :
+================================================
+public class Thread1 extends Thread{
+	@Override
+	public void run() {
+		System.out.println("Thread1 is running.............");
+	}
+}
+
+public class Thread2 extends Thread{
+	@Override
+	public void run() {
+		System.out.println("Thread2 is running.............");
+	}
+}
+
+public class Main {
+	public static void main(String[] args) {
+		Thread1 t1 = new Thread1();
+		t1.start();
+		
+		Thread2 t2 = new Thread2();
+		t2.start();
+	}
+}
+
+
+Note : Performing multiple task from single thread it's not possible

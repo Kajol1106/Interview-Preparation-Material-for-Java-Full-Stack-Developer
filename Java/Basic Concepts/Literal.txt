@@ -1,0 +1,15 @@
+Literals in Java :
+===================
+
+Defn : A literal is a sequence of characters (digits, letters and other characters) that represent constant values to be
+stored in variables or simply say, the value assignmed to a variable is known as literral.
+
+Types of Literals :
+i) String Literal : ex., String str = "Kaju";
+ii) Float Literal : ex., Float num = 23.5f or double d = 123.4;
+iii) Character literal : char c = 'a';
+iv) Boolean literal : boolean flag = true;
+v) Integer literal : int a = 10;
+vi) Null literal : Null literal is specified as 'null'. It is mostly used by reference type. It is used to indicate that the object
+is no longer available.
+

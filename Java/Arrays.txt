@@ -1,0 +1,154 @@
+Data Structure : 
+    ->A data structure is a particular way by which we organize, manage and 
+    store the data in the computer so that it can be used effectively.
+    ->Data structure is not a programming language like c, c++, or java.
+    It is a set of algorithms which we can implement in any programming languages.
+    -> Operations that we can perform on data :-
+    Searching
+    Sorting
+    Insertion
+    Deletion
+    Updataion
+    -> Advantages :-
+    1. We can process the data easily
+    2. It stores the data very efficiently on the disk
+    3. DS is used to develop algorithms
+    4. It stores the data in a secured way
+    -> Types of DS :
+    1) Primitive DS
+        Character
+        Integer
+        Byte
+        Float
+        Long
+        Short
+        Double etc.
+
+    2)Non-Primitive DS
+        1. Linear
+            String
+            Files
+            Arrays
+            Lists
+            Stack
+            Queue etc.
+            Defn : 
+            - Data is arranged in sequential form i.e.
+            one element is connected to only one other element in linear form
+
+
+        2. Non-Linear
+            Graphs and Trees
+            Defn : One element can connect with 'n' number of elements
+
+
+Arrays : 
+    It is a collection of similar type of data or homogenous data.
+    elements are stored in contigeous(sequential) memory location.
+    It can containe primitive or non-primitive elements.
+    It is a index based DS, first index position of an array is 0.
+    Length starts from 1.(last index+1)
+
+Types of Arrays :
+1) Single Dimensional
+    1D Array 
+    ->In this type of array, there is only one row and column is present
+    -> Declaration :
+        Array can be decalred normally like simple variables but we have to provide square([]) braces.
+        int[] a;    //prefered way
+        int [] b;
+        int []c;
+        int d[];
+        int[5] a; //wrong(we can't declare size here)
+
+        When we declare an array, we don't need to provide the size of an array 
+        int[] a, b; //both are Arrays
+        int []a, b; //both are Arrays
+        int a[], b; //a is array and b is int
+        int a, b[]; //a is int and b is array
+        int a[], b[]; //both are Arrays
+        int []a, b[]; //both are arrays 
+        int a, []b; //compile time error
+
+    -> Creation :
+        -When we create an array by using new keyword, we have to provide the size of an array 
+        a=new int[size];
+        -When we create an array by using new keyword, all the index position will bw intialized by default values
+        -we can declare and create an array within a single line.
+        a = new int[size]; //correct
+        a = new int[];  //wrong (array dimension missing error) 
+        int[] a = new int[size]; //correct
+        int a[] = new int[size];    //correct
+        int []a = new [size]int;    //wrong(it will provide error)
+        int[] a = new int[0];   //wrong (it will successfully compile and run)
+        int[] a = new int[-3];  //wrong : It will compile but provides runtime exception  (runtime exception : java.lang.NegativeArraySizeException)
+
+    ->Initialization :
+        a[0] = 10;
+        a[1] = 20;
+        a[2] = 30;
+        -we can provide the values at particular index position 
+        int[] a = new int[2];
+        a[2] = 100; //(compile successfully) if we try to insert element more than size it will throw (Runtime)java.lang.ArrayIndexOutOfBoundException
+        - we can declare, create and initialize an array within single line
+        ex., int[] a = {1, 2, 3}
+
+    -> Retrive :
+        - we can retrive the value by using for loop
+
+
+2) Multi Dimensional Arrays
+    2D, 3D, 4D, 5D.......Array 
+    Zic-Zac Array 
+
+3) Anonymous Array(jinka koi name nahi hota)
+
+Points to remember :
+1. Array are Objects in java
+2. Arrays are stored in "Heap Area"
+
+Difference between creating, decalring and initializing an array with and without using new keyword :
+When we create an array without using new keyword then default value will not be initialized in the array, all the values will be intialized automatically in the array
+
+
+
+
+Mutli Dimensional Array (Array of an Array):
+If an array has multiple rows and multiple columns then it is known as multi-dimensional array.
+Types :
+1) 2D , 3D, 4D, ...etc.
+2) Zic-Zac Array
+
+2D Array : 
+    Declaration :
+        int[][] a; //prefered way
+		int [][]a;
+		int []a[];
+    cases :
+    int[][]a, b;    //both are 2d array
+    int a[][], b;   //a 2d array and b simple variable
+    int []a[], b;   //a 2d array and b 1d array
+    int []a[], b[]  //both 2d array
+    int [][]a, b[]; //a 2d and b 3d array
+    int [][]a, []b; //wrong (compile time error)
+
+    Creation :
+    when we create 2d array we have to provide the size of an array
+    a= new int[row size][column size];
+    cases :
+    a = new int[row size][column size]  //correct
+    a = new int[][];    //error (array dimension missing)
+    a = new int[row size][]; //correct
+    a = new int[][column size]; //compile time error(']' expected)
+
+    whenever we create an array by using new keyword then default values will be intitialized in the array blocks
+    we can declare and create 2D array in single line also 
+    int[][] a = new int[row][column];   //correct
+    int[][] a = new int[row][]; //correct
+    int[][] a = new int[][];    //error
+    int[][] a = new int[0][0];  //correct
+    int[][] a = new int[-row][column];  //will compile successfully but provides runtime exception saying (java.lang.NegativeArraySizeException)
+
+    Initialization :
+    
+

@@ -1,0 +1,26 @@
+Operators in Java :
+=====================
+
+Defn : Operators are the special symbols which perform any operation on one or more operands.
+
+Types :
+i) Arithmetic : It is used in mathematical expression in the same way that they are used in algebra.
+ii) Assignment : It is most common used operator in java. It evaluates the operand on the right hand side and
+then assigns the resulting value to a variable on the left hands side. The right operand can be a variable, constant, function
+call or expression. The type of right operand must be type of compatable with the left operand.
+iii) Relational : It compares two values and determines the relationship between them.
+iv) Logical : A logical operator is an operator that return a boolean result tha's based on the boolean result of one or two
+other expressions.
+v) Bitwise : This operator operates on individual bits of integer types(long, int, short, byte). If an operand is shorter thatn int
+it is promoted to int before doing the operations. It helps to know how integers are represented in binary. For example the decimal
+number 3 is represented as 11 in binary and the decimal number 5 is represented 101 in binary.
+vi) Ternary : It is used as one liner replacement for if-then-else statement. It is the only conditional operator which takes three
+operands and hnce the named ternary.
+syntax : conditions ? if true : if false
+ex.,
+void add() {
+        int a =10, b=20 , c = 90;
+        int res = (a>b) ? a: b;
+        int res2 = (a>b) ? (a>c) ? a : c : (b>c) ? b : c;
+        System.out.println(res);
+}

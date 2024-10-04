@@ -1,0 +1,23 @@
+Difference between final, finally and finalize
+
+==============================================
+
+Final :
+    1) Final is a keyword.
+    2) It is used with variable, method and class.
+    3) It is not used for garbage collection.
+    4) Example :
+
+
+Finally :
+    1) Finally is a block.
+    2) It is used with try or try catch block.
+    3) It has important code int it. And it will execute if any exception occurs or not.
+    4) Example :
+
+
+Finalize : 
+    1) Finalize is a method 
+    2) This method is overridden for an object.
+    3) This method executes just prior to garbage collection.
+    4) Example : 

@@ -1,0 +1,20 @@
+Difference between throw and thrwos keyword 
+
+throw :
+    1) throw keyword is used to create an exception object manually i.e. by programmer.
+    2) throw keyword is mainly used for runtime exceptions or unchecked exception.
+    3) In case of throw keyword we can throw only single exception.
+    4) throw keyword is used within the method.
+    5) throw keyword is followed by new instance.
+    6) we can't write any statement after throw keyword and thus it can be used to break the statement.
+
+
+throws : 
+    1) throws keyword is used to declare the exceptions. i.e. it indicates the caller method 
+    that given type of exception can occur so you have to handle it while calling.
+    2) throws keyword is mainly used for compile time exception or checked exception.
+    3) In case of throws keyword we can declare multiple exceptions i.e. void readFile() throws 
+    FileNotFoundException, NullPointerException etc.
+    4) throws keyword is used with method signature.
+    5) throws keyword is followed by class.
+    6) throws keyword does not have any such rule.

@@ -1,0 +1,18 @@
+Identifiers in java :
+=====================
+
+Defination : it is any name, it can be variable name or class name or method name or object name or package name.
+Rules :
+i) spaces cannot be used.
+int roll no = 101;  //not applicable
+int roll_no = 101; //applicable
+
+ii) only undersocre(_) and dollar($) sign can be used in identifier name,
+
+iii) Integer value cannot be used at first position but can be used after first character.
+int 1roll_no = 100;     //not applicable
+int roll_no1 = 100;     //applicable
+
+iv) Reserved words cannot be used as an identifier name
+int public = 101    //not applicable
+int public1 = 101   //applicable because after in name we used 1

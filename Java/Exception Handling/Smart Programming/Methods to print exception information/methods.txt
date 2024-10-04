@@ -1,0 +1,8 @@
+Methods to print exception information
+
+==========================================
+
+There ar three way to print exception information in java.
+1) printStackTrace method : It will print exception, description and stack trace.
+2) using toString() method : It will print only exception and description.
+3) using getMessage() method : It will print only description.

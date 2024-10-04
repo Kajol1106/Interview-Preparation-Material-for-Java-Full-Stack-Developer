@@ -1,0 +1,356 @@
+- It is introduced in java 1.8 version.
+- Main motive is to implement functional interface (Functional Programming Feature) and code optimization
+- In OOP Data store int form of class and objects
+- Functional Programming - store data in function and varibale form.
+- Lambda expression is annonymous function in java (It does'nt have name and return type and no return value and doesn't have access modifier)
+
+
+1) Lambda Expression :
+=========================
+- Lambda expression used 1st programming language is LISP
+- To enable functional programming in java
+- Write more readable, maintainble and clean code
+- To use  API's very easily and effectively
+- To enable parallel programming.
+
+* Main Objective :
+- to bring benefits of functional programming in java
+
+* what is lambda expression :
+- It is an anonymous(nameless, without return type, without modifiers) function
+
+Example :
+1) public void hello() {
+    System.out.println("Hello");
+}
+//if there is no argument you have to write empty bracket.
+==> () -> System.out.println("Hello");
+
+2) public int sum(int a, int b) {
+    return a+b;
+}
+//if multiple arguments is there you have to take bracket
+==> (a, b) -> a+b;
+
+3) public int square(int a) {
+    return a*a;
+}
+//if single argument is there no need to take bracket
+==> (a) -> {return a*a; } or (a) -> a*a; or a-> a*a;
+
+Rules :
+1) Without curly braces we cannot use return keyword. compile will consider returned value automatically.
+2) within curly braces if we want to return some valye compulsory we should user return statement
+n -> return n*n;    //valid
+n -> {return n*n;}  //valid
+n -> {return n*n};  //invalid
+n -> {return n*n;}; //invalid
+n -> n*n;   //valid
+
+
+Functional Interface :
+======================
+which contains single abstract method (SAM)
+Runnable ==> run()
+Callable ==> call()
+Comparable ==> compareTo()
+ActionListener ==> actionPerformed()
+
+@FunctionalInterface
+interface Interface {
+    public void m1();
+    default void m2() {}
+    public static void m2() {}
+}   //it is valid for functional interface method because there is only one abstract method
+
+@FunctionalInterface
+interface A {
+    public void m1();
+}
+
+@FunctionalInterface
+interface B extends A {
+}
+
+Lambda Expression with the functional interface :
+==================================================
+
+Examples :
+1) ===========================>
+interface Inter {
+    public void m1();
+}
+
+class Demo implements Inter {
+    public void m1() {
+        System.out.println("Hello");
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        Inter i = new Demo();
+        i.m1();
+
+        //we can call above method directly without implementing using lambda expression
+        Inter i = ()-> System.out.println("Hello");
+    }
+}
+
+2) ======================================>
+
+interface Inter {
+    public void add(int a, int b);
+}
+
+class Test {
+    public static void main(String[] args) {
+        Inter i = (a, b)-> System.out.println("sum : "+ (a+b));
+        i.add(10,20);
+    }
+}
+
+Note : no dot class file generated for lambda expression.
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+public class LambdaExpressionDemo {
+    public static void main(String[] args) {
+        //if we want to use Interface method then there is need to write implemented class seprately but using lambda expression we can
+        //write diretly implementation where u want.
+        //Example for threading
+        /*
+        Runnable inter = ()-> {
+            for(int i=0; i<10; i++) {
+                System.out.println("Child thread");
+            }
+        };
+        Thread t = new Thread(inter);
+        t.start();
+        for(int i=0; i<10; i++) {
+            System.out.println("Main thread");
+        }
+         */
+
+        //Example for collection
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(12);
+        list.add(13);
+        list.add(9);
+        list.add(15);
+        list.add(9);
+        //System.out.println(list);
+        Collections.sort(list);
+        //System.out.println(list);
+
+        /*
+        //if you want to implement your own logic for sorting then we have to use Comparator interface compare method
+
+        int compare(Object obj1, Object obj2) {
+            returns -ve if obj1 has to come before obj2;
+            returns +ve if obj1 has to come after obj2;
+            returns 0 if obj1 and obj2 are equal
+        }
+
+         */
+        Comparator<Integer> c = (i1, i2) -> (i1>i2)?-1:(i1<i2)?1:0;
+        Collections.sort(list, c);
+        System.out.println(list);
+
+        //OR
+        Collections.sort(list, (obj1, obj2)-> {
+            return obj2-obj1;
+        });
+        System.out.println(list);
+        //we can use aslo below way to print elements
+        list.stream().forEach(System.out::println);
+
+
+                List<Employee> list = new ArrayList<>();
+                list.add(new Employee(1, "Kaju"));
+                list.add(new Employee(2, "Raju"));
+                list.add(new Employee(3, "Faiju"));
+                list.add(new Employee(4, "Shaiju"));
+                System.out.println(list);
+                //for sorting using integer value
+                Collections.sort(list, (e1, e2)-> {
+                    return e2.getEid()-e1.getEid();
+                });
+                //Collections.sort(list, (e1, e2) ->(e1.getEid()>e2.getEid())? -1 : (e1.getEid()<e2.getEid())? 1: 0);
+                System.out.println(list);
+
+                //sorting using string
+                Collections.sort(list, (e1, e2)-> e1.getName().compareTo(e2.getName()));
+                System.out.println(list);
+    }
+
+}
+
+public class Employee {
+    private int eid;
+    private String name;
+
+    public int getEid() {
+        return eid;
+    }
+
+    public void setEid(int eid) {
+        this.eid = eid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Employee(int eid, String name) {
+        this.name = name;
+        this.eid = eid;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "eid=" + eid +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+
+//Comparable and comparator user for sorting purpose
+
+===============================================
+Anonymous Inner classes VS Lambda Expression :
+===============================================
+
+* The class without having name is called as anonymous inner class
+Thread t = new Thread();
+
+//we are writing a class that extends Thread class
+//below is the example of anonymous inner class
+1) Thread t = new Thread() {
+     //write code here
+};
+
+2) Runnable r = new Runnable() {
+    //write code here
+};
+
+//instead of taking seprate implement class we can use anonymous class
+        //example
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0; i<10; i++) {
+                    System.out.println("Child thread ");
+                }
+            }
+        };
+        Thread t = new Thread(r);
+        t.start();
+        for(int i=0; i<10; i++) {
+            System.out.println("Main thread");
+        }
+
+ 1) annonymous inner class is more powerful than lambda expression because we can use lambda expression if there is only one abstract method in interface but
+ using annonymous class we can implement other methods also. below is the example
+ interface A {
+    m1();
+    m2();
+ }
+ A a = new A() {
+    public void m1() {
+
+    }
+
+    public void m2() {
+
+    }
+ };
+
+ 2) If anonymous inner class implements an interface that conatains single abstract method then only we can replace that anonymous inner class with lambda expressions
+ 3) anonymous inner class can extend a normal class
+ 3) anonymous inner class can extend an abstract class
+ 3) anonymous inner class can implement an interface which conatians any number of abstract methods.
+
+ but lambda expression can implement an interface which contains a single abstract method
+
+ ========================
+ Default Methods :
+ ======================
+ Before 1.7 version every method present inside interface is always public and abstract
+ we can take
+ void m1()
+ abstract void m1()
+ public void m1();
+ public abstract void m1();
+ above all methods was same before 1.7 version
+
+Related methods :
+in 1.8 version default methods + static methods
+in 1.9 version private method also allowed
+
+Variables :
+public static final
+
+* default methods or Virtual extendsion method or defender method
+==================================================================
+
+Without effecting implementation classes if we want to add new method to the interface then we should go for default method
+Example.,
+interface A {
+    void m1();
+    void m2();
+    default void m3() {
+        System.out.println("Hello");
+    }
+}
+
+class B implements A {
+    public void m1() {}
+    public void m2() {}
+}
+
+class C implements A {
+    public void m1() {}
+    public void m2() {}
+}
+
+class Test implements A {
+
+    public void m1() {}
+    public void m2() {}
+
+    //and if we want to implement logic of that default method then override and implement logic
+    @Override
+    public void m3() {
+          System.out.println("This is the implemented logic of default method");
+    }
+    public static void main(String[] args) {
+        Test t = new Test();
+        //we can directly call
+        t.m3();
+    }
+}
+To define general utility methods inside interface with static
+ex., sum(), product() etc.,
+
+interface static methods not implements in implemented class
+Interface static method should be called
+ex.,
+Interface.m1();
+
+from 1.8 version we can write main method also in interface
+to define general utility method we don't need go for classes. we can write that method in interface
+ex., add(), product() etc.,
+
+
+
+
+
+
+

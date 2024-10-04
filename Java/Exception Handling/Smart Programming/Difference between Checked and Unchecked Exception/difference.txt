@@ -1,0 +1,65 @@
+Q. Difference between Checked and Unchecked Exception.
+
+There is a concept that the compile time exceptions occur at the compile time and runtime exceptions occur 
+at runtime. This is a wrong concept. The right concept is that all the exceptions occur at the runtime only.
+
+
+Checked Exception(Compile Time Exception) :
+    1. Checked Exceptions are the exceptions that are checked and handled at compile time.
+    2. The program gives a compilation error if a method throws a checked exception.
+    3. If some code within a method throws a cheked exception, then the method must either handle
+    the exception or it must specify the exception using throws keyword.
+    4. A checked exceptions occur when the chances of failure are too high.
+    5. They are direct subclass of Exception class but do not inherit from RuntimeException.
+    6. Ex., 
+import java.io.FileInputStream;
+
+public class Demo {
+	public static void main(String[] args) {
+		FileInputStream fis = new FileInputStream("abc.txt");
+	}
+}
+above example will throw error if abc.txt file is not present. For not getting error at the runtime we have to 
+handle that error. For the we have to use try__catch block.
+Solution of above program is :
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		try {
+			FileInputStream fis = new FileInputStream("abc.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
+
+Unhecked Exception(RunTime Exception) :
+    1. Unchecked Exceptions are the exceptions that are not checked and handled at compile time.
+    2. The program compiles fine because the compiler is not able to check the exception.
+    3. A method is not forced by compiler to declare the unchecked exceptions thrown by its 
+    implementation. Generally, such methods almost always do not declare them, as well.
+    4. Unchecked exceptions occurs mostly due to programming mistakes.
+    5. They are direct subclass of RuntimeException class.
+    6. Example.,
+public class RuntimeException {
+
+	public static void main(String[] args) {
+		int a = 100, b = 0, c;
+		c = a/b;
+		System.out.println(c);
+	}
+}
+
+//In this program compile cab't check the exception and can compile the program successfully and 
+// will show an Arithmetic Exception.
+
+
+Real World Example : In real world your mother asks for your purse or your company id-card so that
+you won't face any problem due to these things means at compile time before you went to office your 
+mother is checking the things (considered as exceptions) due to which at runtime(which is your company
+area) you can get any problem or exception.

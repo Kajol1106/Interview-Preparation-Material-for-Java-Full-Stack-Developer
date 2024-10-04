@@ -1,0 +1,116 @@
+OOP :
+======
+
+Defination : OOP's stands for Object Oriented Programming Structure . This Paradigm can also be termed as
+method to solve some problem or to do some task. Programming Paradigm is an approach to solve problem using
+some tools and techniques. In OOP's is way by help of which many problem can be solved.
+
+The main conepts or Pillars of OOP's :
+1) Class
+2) Object, Methods
+3) Inheritance
+4) Polymorphisam
+5) Abstraction
+6) Encapsulation
+
+==========================================================================================================
+
+1) Class :
+==========
+    - It is a main pillar of OOP's.
+    - If we relate class with real world then it can be considered as a category of some object like
+    an animal class which is having catx, dogs, lions etc.
+    - So in this the main categorization is called class like animal, birds or vechiles.
+    - In terms of java class can be defined as a collection of objects.
+    - It is not a rea world entity and it is just a template, bluepring or prototype class does not occupy
+    memory because a class like animal but its objects like cates dogs can occupy memory.
+    - Syntax :
+    class Animal {
+        //some stufff here
+    }
+==========================================================================================================
+
+2) Methods :
+============
+    - A method can be defined as set of codes or instruction which perform a particular task.
+    - The methods can be used again and again in a particular code.
+    - Advantages :
+        1) Code reusability
+        2) Code optimization
+    - Syntax :
+        access_modifier return_type methodname(list of parameters) {
+            //method stuff
+        }
+
+=====================================================================================================
+
+3) Object :
+============
+    - It is an instance of class like animal is as class and dog is an instance of animal class.
+    - It is a real world entity.
+    - Objects also occupy memory
+    - It consist of their own identity
+    - Object consist of :
+        . Identity (Name)
+        . States/attribute (Link color, breed or age of dogs etc)
+        . Behaviour (eat, run)
+    - ex., Animal animal = new Animal();
+
+========================================================================================================
+
+4) Inheritance : 
+================
+    - Inheritance is the procedure by which one object acquires all the properties and behaviors of a parent object.
+    or one class aquires the properties or behavior of another class.
+    - for example .,animal class have a method run. then we can inherit the the method of animal class in dog or cat class. 
+    no need to right this methods again and again in inherited class.
+    - Inheritance is also called as IS-A relationship(extend keyword used). For ex., Dog is a animal sparrow is a bird.
+    - There are 5 types of inheritance but java support only three types of inheritance
+    i.e. 1) single inheritance
+        2) Multi-level inheritance
+        3) hierarchical inheritance.
+        Java doesn't support multiple inheritance and hybrid inheritance.
+
+========================================================================================================
+
+5) Polymorphisam : 
+====================
+    - It is the process of performing the same action in different ways. for ex., water can have different forms at different place. 
+    like solid, liquid and gas.
+    - we have two types of polymorphisam 
+    1) compile time polymorphisam 
+    2) Run-time polymorphisam
+
+    - There are two types of polymorphism in Java:
+	1) Method Overloading: Multiple methods with the same name but different parameters.
+	    ex., in calculator clas add method with different parameters
+	2) Method Overriding: A subclass can provide a specific implementation of a method already defined in its parent class.
+	    same method name and parameter but specific implementation
+
+========================================================================================================
+
+6) Abstraction : 
+================
+    - It is the process of hiding the implementation or details and showing the main service or the interfaces to user. 
+    - for ex., As in the car case relevant parts like break, horn, accelerator etc., are shown to driver because 
+    they are necessary for driving. But driver need not to understand the internal function of engine, gear, horn etc.,
+    - In java abstraction is achieved by two ways :
+    1) Abstract class
+        - Abstract class means you cannot create an object from it.
+	    - We use this classes when we want to define common behaviours method and own class implementation methods.
+	    - It's have the both abstract and concrete methods.
+	    - it will be extended by subclasses through the inheritance.
+
+    2) interface
+
+========================================================================================================
+
+7) Encapsulation :
+===================
+    - It is the process of wrapping or binding the data and code action on the data in a single unit. 
+    - A simple example of encapsulation is medicine capsule which is mixed of several medicines.
+
+========================================================================================================
+
+
+

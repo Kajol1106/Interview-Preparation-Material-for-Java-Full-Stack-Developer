@@ -1,0 +1,64 @@
+Variables in Java :
+====================
+
+Defn :
+------
+    A variable is the name of memory location that can contain data. A variable thus has a data type. ex., int a = 10;
+
+Types of Variable :
+===================
+1) Local Variable :
+-------------------
+- Declaration : It is declared inside the bodey of the methods, constructors or blocks.
+- Scope : it can be used inside methods constructors or blocks nut ot outside.
+- When Variable gets memory allocated : It gets allocated when methods, constructors or blocks gets executed. Also when
+    gets exists (block execution completed), local variable get destroyed.
+- Stored memory : it's stored in Stack memory.
+- Default values : It does not have any default values, value should be provided before use.
+- Access specifier : cannot be used with local variables.
+
+1) Instance Variable :
+-------------------
+- Declaration : It is declared inside the class but outside the methods, constructors or blocks.
+- Scope : it can be used inside all methods, blocks and constructors within the class (not inside the static method directly).
+- When Variable gets memory allocated : It gets allocated when the object is created, when objects gets destroyed variable releases memory.
+- Stored memory : it's stored in Heap memory.
+- Default values : It's have the default values like int=0, boolean=false, object=null etc.
+- Access specifier : can be used (private, public, protected)
+- How to access : this variables can be called directly or by using object name.
+
+1) Static Variable :
+-------------------
+- Defn : A variable which is declared as static is called static variable. It cannot be local. You can create a single
+                     copy of static variable and share among all the instances of the class. Memory allocation for static variable happends only once when the
+                     class is loaded in the memory.
+- Declaration : it;s declared with static keyword inside the class but outside the body of the methods, constructors or blocks.
+- Scope : it can be used inside all methods, constructors or blocks including static methods, constructors or blocks..
+- When Variable gets memory allocated : When we run the program and .class file is loaded in JVM, static valible gets allocated.
+when class file gets unloaded from JVM, static variables gets destroyed.
+- Stored memory : it's stored in non-heap memory or static memory.
+- Default values : It's have the default values like int=0, boolean=false, object=null etc.
+- Access specifier : can be used (private, public, protected)
+- How to access : It can be called three ways
+i) can be called directly
+ii) by using class name i.e. Test.b
+iii) by using object reference name.
+
+
+Example :
+public class VariablesDemo {
+    int a = 100;        // it is instance variable
+    static int b = 10;      //it is static variable
+    void add() {
+        int c = 30, d;      //c and d are local variables
+        d = a+b+c;
+        System.out.println(d);
+    }
+
+    void multiplication() {
+        int e = 40, res;
+        //res = a*b*c*e;      //this line give you compile time error because we trying to access other method variable
+        res = a * b * e;
+        System.out.println(e);
+    }
+}

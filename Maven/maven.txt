@@ -1,0 +1,81 @@
+Maven :
+========
+
+Defination : Maven is a powerful project management tool that is based on POM (Project Object Module).
+- It is used for projects build, dependency and documentation.
+
+Dependency :
+------------
+	It is defined as a state of needing something or someone.
+	ex., if a one person want to go restaurant. and restaraunt is away from his home.
+	He want to reach in that restaurant quickly. If he go through the walk, it will take time, if he will 
+	go through the car or any other vechile he will reach on time. So here he depend on the car to reach on time 
+	in restaurant. Here car will be the dependecy of that person.
+
+POM.XML :
+---------
+
+- POM is an acronym for Project Object Model.
+- The pom.xml file contains information :
+	1. Dependencies
+	2. Build directory
+	3. Source directory
+	4. Test source directory
+	5. Plugin
+	6. Goals etc.
+- Maven reads the pom.xml file, then executes the goal.
+
+
+Maven Terminologies :
+----------------------
+1. artifact :- It is an outcome in maven, it can be a file, .class file or jar file, war file, ear file etc.
+
+2. archetype :- It is project template for creating similar type of project in maven.
+
+3. GroupId : It is an ID used to identify the artifacts of a particular organization (naming convention is similar to package name.) ex., com.masai
+
+4. It is the ID for the final outcome (artifactid name will be the root folder of our application)
+
+Understanding the problem without Maven :
+-----------------------------------------
+1. Adding ser of jars in each project :- In case of struts, spring, hibernate frameworks we need to add set of jar files in each project. It must include all the dependencies of jars also.
+
+2. Building and deploying the project : we must have to build and deploy the project so that it may work.
+
+Maven's Objectives :
+--------------------
+1. making the build process easy
+2. providing a uniform build system.
+3. providing quality project information.
+4. encouraging better development pratices.
+
+Maven repository : 
+------------------
+	A Maven repository is a directory of packaged JAR file with pom.xml file. Maven searches for dependencies in the repositories.
+	1. Local Repository
+	2. Central Repository
+	3. Remote Repository
+
+	- Maven dependencies order : Local Repository -> Central Repository -> Remote Repository
+	- If dependency is not found in these repositories, maen stops processing and throws an error.
+
+Maven Build Life Cycle : 
+-------------------------
+1. Validate
+2. Compile
+3. Test-Compile
+4. Test
+5. Package
+6. Install
+7. Deploy
+8. Clean
+
+
+
+ORM :
+=====
+- ORM stands for Object Relational Mapping
+- It is a programming technique for converting data between incompatible type systems using object-oriented programming languages.
+- It means you can write database queries using the object oriented paradigm of your preferred language.
+- ORM sets the mapping between the set of objects which are written in the preferred programming languages like javascript and relational database like SQL.
+- It hides and encapsulate the SQL queires into objects and instead of SQL queries we can use directly the objects to implement the SQL query.

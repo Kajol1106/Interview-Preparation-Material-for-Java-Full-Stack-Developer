@@ -1,0 +1,24 @@
+Defination : Java exception handling is managed by using five keywords 
+    1) try 
+    2) catch
+    3) finally
+    4) throw
+    5) throws 
+
+==================================
+
+Explain try catch.
+
+    - try is an block which contains the code which can throw exception.
+    - try block contatin the risky code which cause error in program.
+    - catch block contains the exception handling code.
+    - catch clause gets the exception as the parameter.
+    - try and catch blocks works in pair.
+    - we can use more than one catch block at a time.
+
+    Control flow of try and catch :
+    - when we user try and catch then program flow from top to bottom.
+    - If there is any exception in try block then the rest of the statements of try block will not executed.
+    - If there is no exception in program then catch block statements will not executed.
+    
+

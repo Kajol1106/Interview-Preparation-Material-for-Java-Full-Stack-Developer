@@ -1,0 +1,493 @@
+introduction : 
+        An Exception is an unwanted or unexpected event which occurs during the execution of 
+    program. Means at the run time it disturupts the normal flow of the exection of program's instructions.
+    Whenever there is exception, the method in which exception occurs will create an object and 
+    that object will store three things :
+    1) Exception name
+    2) Description
+    3) Stack Trace
+
+    Exception Handling :
+        It is an mechanisam of handling the exception or using an alternative method to continue
+    the flow of execution without any disturbance is called as the Exception handling.
+
+    Example : 
+        Suppose that we have to reach at the institue daily by time. We prefer to reach the 
+    institute by using bike. Then this become an normal flow of reaching at the institue. But
+    one day bike's tire got punctured due to that we are not able to reach institue by time.
+    This is called the exception. Which disrupts the normal flow. For this we should find out 
+    an alternative way to reach at the institue. That is called as the exception handling.
+
+============================================================================================================================
+
+customized or user-defined Exception
+
+Defination : If we are creating our own exception that is known as custome exception or user-defined exception.
+java custom exception are used to customize the exception according to user need. By creating custom exception we 
+can create our own exception and messages.
+
+Customized exception are of two type :
+1. checked customized exception. 
+2. unchecked customized exception. 
+
+========================================================================================================================
+
+Q. Difference between Checked and Unchecked Exception.
+
+There is a concept that the compile time exceptions occur at the compile time and runtime exceptions occur 
+at runtime. This is a wrong concept. The right concept is that all the exceptions occur at the runtime only.
+
+
+Checked Exception(Compile Time Exception) :
+    1. Checked Exceptions are the exceptions that are checked and handled at compile time.
+    2. The program gives a compilation error if a method throws a checked exception.
+    3. If some code within a method throws a cheked exception, then the method must either handle
+    the exception or it must specify the exception using throws keyword.
+    4. A checked exceptions occur when the chances of failure are too high.
+    5. They are direct subclass of Exception class but do not inherit from RuntimeException.
+    6. Ex., 
+import java.io.FileInputStream;
+
+public class Demo {
+	public static void main(String[] args) {
+		FileInputStream fis = new FileInputStream("abc.txt");
+	}
+}
+
+above example will throw error if abc.txt file is not present. For not getting error at the runtime we have to 
+handle that error. For the we have to use try__catch block.
+
+Solution of above program is :
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+public class Demo {
+
+	public static void main(String[] args) {
+		try {
+			FileInputStream fis = new FileInputStream("abc.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
+
+Unhecked Exception(RunTime Exception) :
+    1. Unchecked Exceptions are the exceptions that are not checked and handled at compile time.
+    2. The program compiles fine because the compiler is not able to check the exception.
+    3. A method is not forced by compiler to declare the unchecked exceptions thrown by its 
+    implementation. Generally, such methods almost always do not declare them, as well.
+    4. Unchecked exceptions occurs mostly due to programming mistakes.
+    5. They are direct subclass of RuntimeException class.
+    6. Example.,
+public class RuntimeException {
+
+	public static void main(String[] args) {
+		int a = 100, b = 0, c;
+		c = a/b;
+		System.out.println(c);
+	}
+}
+
+//In this program compile cab't check the exception and can compile the program successfully and 
+// will show an Arithmetic Exception.
+
+
+Real World Example : In real world your mother asks for your purse or your company id-card so that
+you won't face any problem due to these things means at compile time before you went to office your 
+mother is checking the things (considered as exceptions) due to which at runtime(which is your company
+area) you can get any problem or exception.
+
+=======================================================================================================================
+
+Difference between Exception and Error :
+
+    Object class is the parent class of all classes in java and Throwable class is the parent 
+class of the Exception and Error class in java.
+
+Exception :
+1) Exception occurs because of our programs.
+2) Exception are recoverable i.e. programmer can handle them using try-catch block.
+3) Exceptions are of two types :
+    i) Compile time exceptions or checked exceptions.
+    ii) Runtime exceptions or unchecked exceptions.
+
+Error : 
+1) Eroors occurs because of lack of system resources.
+2) Errors are not recoverable i.e. programmer can't handle them to their level.
+3) Errors are of one type :
+    ii) Runtime exceptions or unchecked exceptions.
+
+==========================================================================================================================
+
+Difference between final, finally and finalize
+
+Final :
+    1) Final is a keyword.
+    2) It is used with variable, method and class.
+    3) It is not used for garbage collection.
+    4) Example :
+
+
+Finally :
+    1) Finally is a block.
+    2) It is used with try or try catch block.
+    3) It has important code int it. And it will execute if any exception occurs or not.
+    4) Example :
+
+
+Finalize : 
+    1) Finalize is a method 
+    2) This method is overridden for an object.
+    3) This method executes just prior to garbage collection.
+    4) Example : 
+
+====================================================================================================================
+
+Difference between throw and thrwos keyword 
+
+throw :
+    1) throw keyword is used to create an exception object manually i.e. by programmer.
+    2) throw keyword is mainly used for runtime exceptions or unchecked exception.
+    3) In case of throw keyword we can throw only single exception.
+    4) throw keyword is used within the method.
+    5) throw keyword is followed by new instance.
+    6) we can't write any statement after throw keyword and thus it can be used to break the statement.
+
+
+throws : 
+    1) throws keyword is used to declare the exceptions. i.e. it indicates the caller method 
+    that given type of exception can occur so you have to handle it while calling.
+    2) throws keyword is mainly used for compile time exception or checked exception.
+    3) In case of throws keyword we can declare multiple exceptions i.e. void readFile() throws 
+    FileNotFoundException, NullPointerException etc.
+    4) throws keyword is used with method signature.
+    5) throws keyword is followed by class.
+    6) throws keyword does not have any such rule.
+
+=======================================================================================================================
+
+Finally Block :
+
+Finally block is a block which is followed by the try and catch block. This block will always gets executed whether 
+any exception occur or not. The finally block has important code like closing connection code or stream etc.
+
+Flow of finally block example :
+ try {
+    //file open code;
+    //read/write code;
+ } catch (Exception e) {
+    //handling code or statement
+ }
+ finally {
+    // cleanup code 
+ }
+
+ - If any exception occure then first try block will execute then catch block will execute then after that 
+ finally block will execute.
+ - when no exception occure finally block will execute directyly afterr try block and catch block will not execute.
+
+
+ Certain points about finally block :
+    - We can use multiple catch blocks with one try block but we can only use single finally block with one 
+    try block, not multiple.
+    - The statements present in the finally block execute even if the try block contains control transfer statements
+    (i.e. jump statements break or return) like return, break or continue.
+
+
+The possibilities that disturbs the execution of finally block like 
+    - Using of the System.exit() method.
+    - Causing a fatal errror that causes the process to abort.
+    - The death of a thread.
+    - Due to an exception arising in finally block.
+
+==============================================================================================================================
+
+Methods to print exception information
+
+There ar three way to print exception information in java.
+1) printStackTrace method : It will print exception, description and stack trace.
+2) using toString() method : It will print only exception and description.
+3) using getMessage() method : It will print only description.
+
+==============================================================================================================================
+
+Throw Keyword :
+
+1. Keywords Working :
+    - try : In try block we can write statements that can throw exception i.e. it mentains risky code.
+    - catch : It mentains exception handling code. i.e. alternative way for exception.
+    - finally : It mentains clean up code i.e. closing the resources.
+    - throw : It creates exception object manually (by programmer) and handover to JVM.
+
+2. We can throw either checked or unchecked exceptions but throw is best for customized exception.
+
+3. We can only throw class that comes in throwable child class.
+
+4. We cannot write any statement after throw, otherwise it will provide unreachable statement error.
+
+    The throw keyword in java is mainly used in case of custom exception. It is used to expliciti throw an exception.
+    We can throw both unchecked and checked exception. In the case of throw keyword programmer throw the exception by
+    it own.
+
+    -> Default working of exception : 
+
+public class Test {
+	public static void main(String[] args) {
+		int a = 100;
+        int b = 0;
+        int c = a/b;
+        System.out.println(c);
+	}
+}
+
+In the above example ,
+1) Main method generate Exception Object (It includers Exception name, Description, Stack Trace)
+2) JVM passes the exception object to Default Exception Handler, if exception is not handled by main() method.
+3) Default Exception Handler will print the exception object.
+This is how Exception works if it occurs.
+
+
+The block or method in which an exception occurs it passes the exception object to JVM but in case
+of throw keyword programmer itself create exception object and passes to JVM. This is done according 
+to project or conditions. 
+
+Example : 
+
+Suppose we have a project of voting which should throw an exception if the age of voter is less than 
+18. So here custom exception is needed thats why throw keyword is used and programmer create object 
+of exception in this scenario and pass this to JVM and exception is printed by default exception handler.
+
+public class YoungerAgeException extends Runtime {
+
+	public YoungerAgeException(String msg) {
+		super(msg);
+	}
+	
+}
+
+public class Voting {
+
+	public static void main(String[] args) {
+		int age = 19;
+		if(age < 18) {
+			throw new YoungerAgeException("You are not eligible for voting");
+		}
+		else {
+			System.out.println("You can vote successfully");
+		}
+	}
+
+}
+
+==============================================================================================================================
+
+Throws Keyword :
+
+1. Keywords Working :
+    - try : In try block we can write statements that can throw exception i.e. it mentains risky code.
+    - catch : It mentains exception handling code. i.e. alternative way for exception.
+    - finally : It mentains clean up code i.e. closing the resources.
+    - throw : It creates exception object manually (by programmer) and handover to JVM.
+    - throws : It is used to declare the exception. It gives an information to the caller 
+    method that there may occur an exception so it is better for the caller method to provide 
+    the exception handling code so that normal flow can be maintained.
+
+2. If we call a method that declares an exception, we must either caught the exception using try 
+catch block or declare the exception using throws keyword or say If thee is any checked exceptions, 
+we will get compile time error saying "unreported exception XXX must be caught or declared to be thrown".
+To prevent this compile time we can handle the exception in two ways :
+1) using try catch 2) By using throws keyword.
+
+3. throws keyword used to declare the checked exceptions only. If there occurs any unchecked exception 
+such as NullPointerException, it is programmers fault that he is not performing check up before the code being used.
+
+
+Throws keywod in java is used to declare an exception. It is gives an information to the caller 
+method that there may occur an exception so it is betterr for the caller method to provide the 
+exception handling code so that normal flow can be maintained. If any exception occurs in the 
+program in any method then if programmer wants that the another programmer or method should handle 
+that particular exception in its own way so throws keyword is used with method with the exception name.
+
+Note : Throws keyword is used to declare only for the checked exception such as NullPointerException, 
+it is programmers faluts that he is not performing check up before the code being used. 
+
+Working : 
+
+program 1 :
+methodName() throws Exception name {
+
+}
+
+progam 2 with main method :
+public static void main(String[] args) {
+    try {
+        //code here methodName() is called
+    }
+    catch (Exception e) {
+        System.out.println(e);
+    }
+}
+
+Exception is thrown to caller method which is main method and it will handle this exception in its own way.
+
+
+Example : 
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+public class ReadWrite extends RuntimeException{
+	void readFile() throws FileNotFoundException {
+		FileInputStream fis = new FileInputStream("abc.txt");
+	}
+	
+	void saveFile() throws FileNotFoundException {
+		String text = "This is demo";
+		FileOutputStream fos = new FileOutputStream("xyz.txt");
+	}
+}
+
+import java.io.FileNotFoundException;
+public class Text {
+
+	public static void main(String[] args) {
+		ReadWrite rw = new ReadWrite();
+		try {
+			rw.readFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			rw.saveFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Is exeption handling working or not ");
+	}
+
+}
+
+===============================================================================================================================
+
+Defination : Java exception handling is managed by using five keywords 
+    1) try 
+    2) catch
+    3) finally
+    4) throw
+    5) throws 
+
+
+Explain try catch.
+
+    - try is an block which contains the code which can throw exception.
+    - try block contatin the risky code which cause error in program.
+    - catch block contains the exception handling code.
+    - catch clause gets the exception as the parameter.
+    - try and catch blocks works in pair.
+    - we can use more than one catch block at a time.
+
+    Control flow of try and catch :
+    - when we user try and catch then program flow from top to bottom.
+    - If there is any exception in try block then the rest of the statements of try block will not executed.
+    - If there is no exception in program then catch block statements will not executed.
+    
+===========================================================================================================================
+
+Various possible combination of try catch block .
+
+
+public class VariousCombinationOfTryCatch {
+
+	public static void main(String[] args) {
+		/*
+		//1. try can't work without catch block
+		try {
+			// code
+		}
+		*/
+		
+		/*
+		 // 2. catch can't work without try block
+		  catch {
+			// code
+		  }
+		 */
+		
+		//3. try and catch work in pairs
+		try {
+			//code
+		} 
+		catch (Exception e) {
+			// code
+		}
+		
+		//4. we can use many as catch blocks with same try block
+		try 
+		{
+			//code
+		} 
+		catch (Exception e) {
+			// code
+		}	
+		catch (Exception e) {
+			// code
+		}
+		
+		
+		//5. We can write try-catch block inside the catch block
+		try 
+		{
+			//code
+		} 
+		catch (Exception e) 
+		{
+			try 
+			{
+				//code
+			} 
+			catch (Exception e2) 
+			{
+				//code
+			}
+		}
+		
+		
+		//6. try block can contain another try-catch block inside it.
+		try 
+		{
+			try 
+			{
+				//code
+			} 
+			catch (Exception e) 
+			{
+				//code
+			}
+		} 
+		catch (Exception e) 
+		{
+			//code
+		}
+		
+		
+		//7. we can use try-catch inside the finally block also.
+		finally 
+		{
+			try 
+			{
+				//code
+			} 
+			catch (Exception e2) 
+			{
+				//code
+			}
+		}
+	}
+
+}
+
