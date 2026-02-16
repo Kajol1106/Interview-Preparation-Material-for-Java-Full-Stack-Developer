@@ -1,0 +1,200 @@
+What is gRPC?
+===============
+gRPC = Google Remote Procedure Call
+It is a high-performance communication framework created by Google 
+that allows different applications/services to talk to each other quickly and efficiently, 
+even if they are written in different programming languages.
+
+👉It is mainly used in:
+Microservices
+Cloud applications
+Real-time systems
+Backend service communication
+
+Why gRPC is popular?
+Very fast ⚡
+Uses less network data 📉
+Supports real-time communication 🔄
+Works across languages (Java, Go, Python, C++ etc.)
+
+
+Why gRPC? (Monolith → Microservices Story)
+==========================================
+🏢 Monolithic Application Example
+Imagine an E-commerce app with modules:
+Order
+Payment
+Courier
+Tracking
+
+In monolithic architecture:
+All modules are in one codebase
+One WAR/JAR deployment
+❌ Problems in Monolith
+Tight coupling
+If one module fails → whole app fails
+Small change → redeploy whole app
+Deployment bottleneck
+
+🧩 Microservices Solution
+We split modules into services:
+Order Service
+Payment Service
+Courier Service
+Tracking Service
+
+Each service:
+Has its own database
+Deploy independently
+Failure isolated
+Now services must communicate with each other.
+
+They can use REST or gRPC.
+
+REST uses:
+============
+Order Service → Courier Service (REST)
+
+HTTP/1.1
+JSON (text format)
+
+❌ REST Issues in Microservices
+High network latency
+Large JSON payloads
+Serialization/Deserialization overhead
+Only Request → Response model
+No built-in streaming
+
+
+
+gRPC uses:
+===============
+Order Service → Courier Service (gRPC)
+Protocol Buffers (Binary data)
+HTTP/2
+
+✅ Benefits
+Smaller payload size
+Faster serialization
+Multiple requests in single connection
+Built-in streaming support
+
+What is Protocol Buffers (ProtoBuf)?
+======================================
+ProtoBuf is a binary data format used by gRPC.
+👉 ProtoBuf is:
+Smaller
+Faster
+Strongly typed
+Version friendly
+
+gRPC Communication Types (VERY IMPORTANT FOR INTERVIEW)
+=====================================================
+
+
+1️⃣ Unary RPC (Simple Request–Response)
+====================================
+Client → 1 request
+Server → 1 response
+
+Example
+Check order status:
+
+
+2️⃣ Server Streaming RPC
+=====================
+Client → 1 request
+Server → Multiple responses (live updates)
+
+🍔 Real-World Example: Food Delivery App
+You order food and get live updates:
+Food is being prepared
+In oven
+Out for delivery
+Delivered
+Client doesn’t need to ask again — server keeps sending updates.
+
+3️⃣ Client Streaming RPC
+=========================
+Client → Multiple requests
+Server → 1 final response
+
+📸 Example: Upload Photos
+Client uploads:
+Photo1
+Photo2
+Photo3
+Server replies: All photos uploaded successfully
+
+4️⃣ Bidirectional Streaming (Full Duplex)
+================================
+Client ↔ Server send messages continuously.
+
+💬 Example: Chat Application
+Client sends message
+Server sends reply
+Both talk simultaneously
+
+🔹 REST vs gRPC (Interview Table)
+Feature		REST API		gRPC
+Protocol	HTTP/1.1		HTTP/2
+Data Format	JSON (text)		ProtoBuf (binary)
+Speed		Slower			Faster
+Streaming	Not native		Built-in
+Requests	One at a time		Multiple in one connection
+Best Use	Web & Public APIs	Microservices & Real-time apps
+
+
+gRPC vs Spring WebFlux (Important Interview Question)
+====================================================
+Choose gRPC when:
+You need high performance
+Communication between microservices
+Handling large data
+Need cross-language support
+Strong API contracts required
+
+Choose Spring WebFlux when:
+Building reactive web apps
+Need WebSocket / SSE
+Working inside Spring ecosystem
+Simpler than gRPC
+
+
+Why is gRPC faster than Reactive REST/WebSocket?
+==============================================
+Answer (Simple):
+Reactive REST still uses JSON, which needs:
+Serialization
+Deserialization
+More network bandwidth
+
+WebSocket:
+Keeps connection open
+Consumes more server resources
+
+gRPC:
+Uses binary ProtoBuf
+Uses HTTP/2 multiplexing
+Requires less bandwidth and resources
+
+👉 That’s why gRPC is faster and more efficient.
+
+
+Q5. Does gRPC replace REST?
+============================
+No ❌
+Both are used together:
+REST → External APIs
+gRPC → Internal microservices communication
+
+Real-World Usage of gRPC
+============================
+Companies using gRPC:
+Google
+Netflix
+Uber
+Square
+
+Example:
+Mobile App → API Gateway (REST) → Internal Microservices (gRPC)

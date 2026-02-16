@@ -1,0 +1,112 @@
+⭐ Core Spring Boot Annotations
+==================================
+1️⃣ @SpringBootApplication
+👉 The main annotation of every Spring Boot app.
+
+@SpringBootApplication
+public class MyApp {
+   public static void main(String[] args) {
+      SpringApplication.run(MyApp.class, args);
+   }
+}
+
+
+It combines 3 annotations:
+===========================
+@Configuration : Marks a class as a Java configuration file (replacement of XML).
+Use: Define beans manually.
+
+@Configuration
+---------------
+public class AppConfig {
+   @Bean
+   public MyService myService() {
+      return new MyService();
+   }
+}
+
+3️⃣ @Bean
+Tells Spring: “Create and manage this object as a bean.”
+Use: When you want manual control over object creation.
+
+
+@EnableAutoConfiguration
+Automatically configures beans based on dependencies in classpath.
+Example: If MySQL driver present → auto DB config.
+
+@ComponentScan
+----------------
+Tells Spring where to scan for components.
+Usually not written manually because it’s included in @SpringBootApplication.
+Use: Starts Spring Boot app + auto config + scans components.
+
+
+🧩 Dependency Injection Annotations
+======================================
+5️⃣ @Component
+Generic stereotype for Spring-managed beans.
+Use: Marks any class as Spring bean.
+
+6️⃣ @Service
+=============
+Specialized version of @Component.
+Use: Business logic layer.
+
+7️⃣ @Repository
+Used for DAO / database layer.
+Extra benefit: Converts DB exceptions into Spring exceptions.
+
+8️⃣ @Controller
+Marks class as Spring MVC controller (returns HTML views).
+
+9️⃣ @RestController
+Combination of:
+@Controller
+@ResponseBody
+Use: Build REST APIs (returns JSON).
+
+🔟 @Autowired
+Used for Dependency Injection automatically.
+
+
+🌐 Web / REST Annotations
+===========================
+1️⃣1️⃣ @RequestMapping
+Maps HTTP requests to methods.
+
+| Annotation        | HTTP Method |
+| ----------------- | ----------- |
+| `@RequestMapping` | Any         |
+| `@GetMapping`     | GET         |
+| `@PostMapping`    | POST        |
+| `@PutMapping`     | PUT         |
+| `@DeleteMapping`  | DELETE      |
+| `@PatchMapping`   | PATCH       |
+
+
+1️⃣2️⃣ @PathVariable
+Read value from URL.
+
+1️⃣3️⃣ @RequestParam
+Read query parameters.
+
+1️⃣4️⃣ @RequestBody
+Reads JSON request body → Java object.
+
+🗄️ Database / JPA Annotations
+=============================
+1️⃣5️⃣ @Entity
+Marks class as DB table.
+
+1️⃣6️⃣ @Id
+Primary key.
+
+1️⃣7️⃣ @GeneratedValue
+Auto-increment ID.
+
+⚙️ Configuration & Properties
+===================================
+1️⃣8️⃣ @Value
+Inject values from application.properties.
+@Value("${server.port}")
+private String port;

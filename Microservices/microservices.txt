@@ -1,0 +1,200 @@
+🔹 What are Microservices?
+================================
+Microservices is an architecture where an application is built as small independent services.
+
+Each service:
+Does one specific job
+Has its own database
+Can be deployed independently
+Communicates using APIs (REST/gRPC/Messaging)
+👉 Opposite of Monolithic Architecture.
+
+🔹 Monolith vs Microservices (Simple Example)
+=============================================
+🏢 Monolithic App
+One big application containing:
+Order
+Payment
+Shipping
+Notification
+
+Problems ❌
+Small change → redeploy whole app
+One bug → whole app down
+Hard to scale
+
+
+🧩 Microservices App
+========================
+Split into services:
+Order Service
+Payment Service
+Shipping Service
+Notification Service
+
+Benefits ✅
+Deploy independently
+Scale independently
+Failure isolation
+
+
+🔹 Advantages of Microservices
+==============================
+✔ Independent deployment
+✔ Better scalability
+✔ Faster development
+✔ Technology flexibility
+✔ Fault isolation
+
+🔹 Disadvantages of Microservices
+=================================
+❌ Complex architecture
+❌ Network latency
+❌ Distributed debugging is hard
+❌ Requires DevOps & monitoring
+
+👉 Interview tip: Always mention both pros & cons.
+
+Q3. Why companies move from Monolith to Microservices?
+=======================================================
+To improve:
+Scalability
+Reliability
+Faster deployments
+Independent teams
+
+Q4. What is API Gateway?
+===========================
+Single entry point for all clients.
+Responsibilities:
+Routing requests
+Authentication
+Rate limiting
+Logging
+ex., Client → API Gateway → Services
+
+
+
+Q5. How do microservices communicate?
+=======================================
+Two ways:
+1️⃣ Synchronous Communication
+REST API
+gRPC
+
+2️⃣ Asynchronous Communication
+RabbitMQ
+Kafka
+
+Interview tip:
+Use both together.
+
+
+Q6. What is Service Discovery?
+=================================
+Services must find each other dynamically.
+Instead of hardcoding URLs: ex., Order Service → http://payment-service:8080 ❌
+Use service registry: Order Service → Service Registry → Payment Service ✅
+
+Tools:
+Eureka
+Consul
+
+Q7. What is Database per Service?
+======================================
+Each microservice has its own database.
+
+Why?
+Avoid tight coupling
+Independent scaling
+Independent schema changes
+❌ Never share DB between services.
+
+
+Q8. What is Distributed Transaction Problem?
+===============================================
+Multiple services → multiple databases.
+One service fails → data becomes inconsistent.
+
+Example:
+Order created ✅
+Payment failed ❌
+
+Solution:
+👉 Saga Pattern
+
+
+
+Q9. What is Saga Pattern? ⭐ (Very Important)
+===============================================
+Handles distributed transactions.
+
+Two Types:
+Choreography (event-based)
+Orchestration (central controller) : Managing multiple containers. (Kubernets)
+
+Example: Order → Payment → Inventory → Email
+If payment fails:
+Order is cancelled (rollback).
+
+
+Q10. What is Circuit Breaker?
+===============================
+Prevents calling a failing service repeatedly.
+
+Example:
+Payment service down ❌
+Circuit breaker stops calling it.
+
+Tool:
+Resilience4j
+
+
+Q11. What is Load Balancing?
+===============================
+Distributes traffic among multiple service instances.
+ex., 
+Order Service (3 instances)
+Requests distributed equally.
+
+
+Q12. What is Fault Tolerance?
+================================
+System continues working even if one service fails.
+
+Techniques:
+Retry
+Circuit breaker
+Fallback methods
+
+
+Q13. What is Observability?
+==============================
+Monitoring microservices using:
+Logging
+Metrics
+Tracing
+
+Tools:
+ELK Stack
+Prometheus
+Grafana
+Zipkin
+
+
+Q14. What is Containerization?
+=================================
+Packaging service with its dependencies.
+
+Tool:
+Docker
+
+
+🔹 Microservices Design Patterns
+====================================
+Important patterns to mention in interview:
+API Gateway Pattern
+Saga Pattern ⭐
+Circuit Breaker Pattern ⭐
+Service Discovery Pattern
+Database per Service Pattern

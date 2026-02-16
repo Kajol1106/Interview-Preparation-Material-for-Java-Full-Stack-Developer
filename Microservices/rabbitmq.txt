@@ -1,0 +1,174 @@
+What is RabbitMQ?
+====================
+RabbitMQ is a message broker.
+👉 It helps different services send and receive messages safely without talking directly.
+
+Think like a Post Office 📮
+Sender → gives message to post office
+Receiver → collects message later
+Services don’t need to be online at the same time.
+
+
+🔹 Why do we need RabbitMQ?
+=============================
+In microservices:
+Services should not call each other directly every time.
+Direct calls = tight coupling + failure risk.
+ex., Order Service → Payment Service → Email Service
+If Email service is down ❌
+Order fails ❌
+Order Service → RabbitMQ → Email Service
+
+Order succeeds ✅
+Email will be sent later when service is up.
+👉 This is called Asynchronous Communication
+
+
+🔹 Important RabbitMQ Components
+=================================
+1️⃣ Producer
+Service that sends message
+Example: Order Service sending order details.
+
+2️⃣ Consumer
+Service that receives message
+Example: Email Service sending order confirmation email.
+
+3️⃣ Queue
+Temporary storage where messages wait.
+👉 Like a waiting line.
+
+4️⃣ Exchange
+Router that decides where message should go
+Producer never sends directly to queue.
+Producer → Exchange → Queue → Consumer
+
+5️⃣ Binding
+Rule that connects Exchange to Queue.
+
+User places order 🛒
+Order Service (Producer)
+        **↓**
+
+     **Exchange**
+
+        **↓**
+
+      **Queue**
+
+        **↓**
+
+Email Service (Consumer)
+
+🔹 Types of Exchanges (VERY IMPORTANT)
+=========================================
+1️⃣ Direct Exchange
+Routes message based on exact routing key
+order.created → Order Queue
+order.cancelled → Cancel Queue
+👉 Exact match required.
+
+2️⃣ Fanout Exchange
+Send message to ALL queues
+Example:
+Order placed → notify:
+Email service
+SMS service
+Analytics service
+
+All get same message.
+
+3️⃣ Topic Exchange (Most asked)
+Uses pattern matching
+Routing key example:
+order.created
+order.updated
+payment.failed
+
+Queue can subscribe using pattern:
+order.*
+payment.#
+
+4️⃣ Headers Exchange (Rarely asked)
+Routes using message headers instead of routing key.
+
+
+🔹 Message Acknowledgement
+Q: What if consumer crashes after receiving message?
+======================================================
+RabbitMQ supports ACK (acknowledgement).
+
+Flow:
+Consumer receives message
+After processing → sends ACK
+RabbitMQ deletes message
+If consumer crashes before ACK ❌
+Message is sent again.
+
+👉 Ensures no message loss
+
+🔹 Message Durability
+Q: What happens if RabbitMQ server restarts?
+============================================
+We can make:
+Queue durable
+Message persistent
+Then messages survive restart.
+
+🔹 Prefetch Count (Load Balancing)
+If multiple consumers exist:
+RabbitMQ distributes messages.
+Prefetch count → number of messages a consumer can process at a time.
+Helps avoid overloading one consumer.
+
+🔹 Dead Letter Queue (DLQ)
+Q: What if message cannot be processed?
+=======================================
+Example:
+Payment fails 5 times ❌
+Instead of retry forever:
+Message goes to Dead Letter Queue
+
+Used for:
+Debugging
+Reprocessing later
+
+🔹 When to Use RabbitMQ?
+==========================
+Use RabbitMQ when:
+Sending emails 📧
+Payment processing 💳
+Order processing 🛒
+Notifications 🔔
+Background jobs ⚙️
+
+🔹 Real World Architecture Example
+==================================
+E-commerce Order Flow:
+User places order
+     ↓
+Order Service
+     ↓
+RabbitMQ
+     ↓      ↓      	↓
+Payment  Email  	Inventory
+Service  Service 	Service
+All services work independently.
+
+
+
+Q9. RabbitMQ vs Kafka?
+========================
+Simple answer for interview:
+
+RabbitMQ → Task processing & messaging
+Kafka → Event streaming & big data
+
+
+🔹 RabbitMQ vs REST (Interview Question)
+==========================================
+Feature			REST					    RabbitMQ
+Communication	Synchronous				    Asynchronous
+Dependency		Services must be online		Services can be offline
+Speed			Slower for heavy load		Better for background tasks
+Reliability		Less					    High
