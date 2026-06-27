@@ -1,0 +1,51 @@
+1. Programming Languages :-
+==========================
+- C, C++, Java, Python, C# etc.
+- Use : :ogic, Projects (Standalone Applications, Desktop Applications, Software) etc. 
+
+2. Query Languages :-
+=======================
+- SQL, PL-SQL, Oracle etc. 
+- Use : Database (MySQL, Oracle, MongoDB etc) manipulation
+
+3. Markup Languages :-
+======================
+- HTML, DHTML, XML, XHTML etc.
+- Use : Front-end part etc.
+
+4. Scripting Languages :-
+=========================
+
+	4.1 Client Side Scripting Languages :-
+	---------------------------------------
+	Eg., Javascript, VB Script etc.
+	Use : Validations etc.
+	
+	4.2 Server Side Scripting Languages :-
+	--------------------------------------
+	Eg., PHP, Servlets & JSP (Advance Java), Python etc.,
+	Use : Server interaction (client-server arch.)
+	
+Technologies :- CSS, JQuery, AJAX.
+
+
+Frameworks :-
+=============
+-> Java : Struts, Spring, Hibernate, JSF etc.
+-> Python : Flask, Django, web2py etc.,
+-> JavaScript : Angular JS, Node JS, React JS etc., 
+-> PHP : Laravel, CakePHP, Drupal, CodeIgniter etc.,
+
+
+Platforms (OS) : 
+================
+=> Desktop OS : Linux, Unix, MAC, Windows 
+=> Mobile OS : Android, IOS, Blackberry etc., 
+
+
+What to learn in Java ? 
+==========================
+1. Core Java (Fundamentals) 
+2. Advance Java (JSP, Servlets) 
+3. SQL, XML, HTML, JavaScript, web-services 
+4. Java Frameworks : Spring, Hibernate
