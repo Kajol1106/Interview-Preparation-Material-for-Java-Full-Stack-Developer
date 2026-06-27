@@ -1,0 +1,353 @@
+=> What is Java ? 
+===================
+1. Programming Language : Java is a HIGH LEVEL OBJECT ORIENTED PROGRAMMING LANGUAGE. 
+2. Platform : Java is a platform because java has its own runtime environment (JRE) 
+  
+=> Editions of Java :- 
+=======================
+1. J2SE : 
+-> Java 2 Standard Edition (Core Java) 
+-> In this edition we learn java fundamentals 
+-> Projects : Standalone Applications 
+
+2. J2EE : 
+-> Java 2 Enterprise Edition (Advance Java) 
+-> In this edition we learn server side programming 
+-> Projects : Enterprise Applications 
+ 
+3. J2ME : 
+-> Java 2 Micro Edition (it has been replaced by Android) 
+-> In this edition we learn micro programming 
+-> Projects : Mobile Based Applications 
+
+=> Java History :- 
+===================
+-> Company : Sun Microsystems (Oracle) 
+-> Designed By : James Gosling & his team
+-> Idea : Java idea came because designers wanted to create a language which should be simple, platform independent, tight coded programming language etc 
+-> Name : Oak (Java) 
+-> Year : 1991 (development) -> 1995 (release) 
+-> Symbol : Coffee 
+
+=> Versions of Java :- 
+========================
+-> https://en.wikipedia.org/wiki/Java_version_history 
+
+Java Softwares : 
+=================
+1. JDK (Java Development Kit) : 
+ - Latest version : Java SE 15 
+ - LTS (Long Term Service) : Java SE 8, JavaSE11 
+  
+2. Editor : Notepad, Notepad++ 
+  
+3. IDE's (Integrated Development Environment) : 
+ -> An integrated development environment is a software application that provides comprehensive facilities to computer programmers for software 
+    development. An IDE normally consists of at least a source code editor, build automation tools and a debugger.
+
+-> IDE used for Java are :- 
+a. Eclipse (Java SE, Java EE) - 2020-09 | 16 September 2020 | 4.17 
+b. Netbeans (Java SE, Java EE) - Netbeans IDE 8.2 was released on 3 October 2016 
+
+ 
+=> What is difference between C, C++ & Java :-
+===============================================
+1. PROGRAMMING PARADIGM : 
+ -> C : Procedural Language 
+ -> C++ : OOP (Object Oriented Programming) 
+ -> Java : Pure OOP (Object Oriented Programming) - 99% 
+  
+2. ORIGIN :- 
+ -> C : Based on Assembly Language 
+ -> C++ : Based on C Language 
+ -> Java  : Based on C & C++
+
+3. DESIGNED BY/YEAR :- 
+ -> C : Dennis Ritchie / 1972 
+ -> C++ : Bjarne Stroustrup / 1979
+ -> Java : James Gosling / 1995
+
+4. TRANSLATOR :- 
+ -> C : Compiler 
+ -> C++ : Compiler 
+ -> Java : Interpreter & Compiler
+
+5. FILE GENERATED :- 
+ -> C : .exe file 
+ -> C++ : .exe file 
+ -> Java : .class file
+
+6. STATIC/DYNAMIC PROGRAMMING LANGUAGE : 
+ -> C : Static Programming Language 
+ -> C++ : Static Programming Language
+ -> Java : Dynamic Programming Language
+
+7. PRE-PROCESSOR DIRECTIVES :- 
+ -> C : Support header files (#include, #define) 
+ -> C++ : Support header files (#include, #define) 
+ -> Java : Use packages (import) 
+
+8. PLATFORM DEPENDENT/INDEPENDENT :- 
+ -> C : Platform Dependent 
+ -> C++ : Platform Dependent 
+ -> Java : Platform Independent 
+
+9. POINTERS :- 
+ -> C : Support pointers 
+ -> C++ : Support pointers 
+ -> Java : Does not support pointers 
+
+10. INHERITANCE :- 
+ -> C : No inheritance 
+ -> C++ : Supports inheritance 
+ -> Java : Supports inheritance but not multiple inheritance 
+
+11. OVERLOADING :- 
+ -> C : Does not support overloading 
+ -> C++ : Supports overloading 
+ -> Java : Supports overloading but not operator overloading 
+
+12. DESTRUCTORS :- 
+ -> C : Does not support constructor and destructor 
+ -> C++ : Supports destructor 
+ -> Java : Does not support destructor
+
+13. CALL BY VALUE / CALL BY REFERENCE :- 
+ -> C : Supports both 
+ -> C++ : Supports both 
+ -> Java : Support only Call By Value 
+
+
+=> What is difference between Java & Python ? 
+================================================
+1. PROGRAMMING PARADIGM:- 
+ -> Java : Pure OOP (Object Oriented Programming) (from JavaSE 8 version Java introduced some procedural oriented programming 
+    paradigm features like Lamba Expression, functional interface, Functions, Predicates, Module System (java9) etc) 
+ -> Python : Procedural Oriented and OOP 
+  
+2. STATICALLY OR DYNAMICALLY TYPED LANGUAGE:- 
+ -> Java : Statically Typed Programming Language (int rollno=101; String name="deepak";) 
+ -> Python : Dynamically Typed Programming Language (rollno=101; )
+
+3. COMPILATIVE OR INTERPRETIVE LANGUAGE:- 
+ -> Java : It is both compilative and interpretive programming language 
+ -> Python : It is interpretive programming language 
+  
+4. TRANSLATOR:- 
+ -> Java : It has compiler and interpreter 
+ -> Python : It has only interpreter 
+  
+5. SPEED:- 
+ -> Java : It is fast as compared to python 
+ -> Python : It is slower as compared to java 
+
+6. PORTABILITY:- 
+ -> Java : As java supports more hardwares like computers, mobiles, remotes, tv etc thus java is more portable 
+ -> Python : It is less portable as comapred to java 
+  
+7. INHERITANCE:- 
+ -> Java : It supports except multiple inheritance 
+ -> Python : It supports all inheritances 
+  
+8. USE OF ";":- 
+ -> Java : Its mendatory to use ; in java 
+ -> Python : Its not mendatory to use ; in python
+
+9. USE OF {}:- 
+ -> Java : Its mendatory to use {} in java
+-> Python : {} are not used in python (python used indentation) 
+ 
+10. SYNTAX:- 
+ -> Java : Hard Coded (if you miss any ; or {} then it will provide an error) 
+ -> Python : Easy Syntax (easy to remember as it is close to humans) 
+  
+11. LENGTH OF CODE:- 
+ -> Java : Java has more number of lines of code 
+ -> Python : Python has less number of lines of code 
+  
+12. DATABASE COMPITABILITY:- 
+ -> Java : It has more compatibility with database as compared to python (JDBC - Java Database Connectivity)
+-> Python : It is less compatible with database and due to this reason python is rarely used in distributed (enterprise) applications. 
+  
+13. FRAMEWORKS:- 
+ -> Java : Java provides more frameworks for eg Spring, Hibernate, JSF, Struts etc 
+ -> Python : Python provides less framework as compared to java for eg Django, Flask etc 
+  
+14. MACHINE LEARNING LIBRARIES:- 
+ -> Java : Weka, Mallet, Deeplearning4j, MOA etc 
+ -> Python : Tensorflow, Pythorch etc
+
+15. BEST FOR WHICH AREA:- 
+ -> Java : Java is best for Desktop GUI Applications, Enterprise Applications, Mobile Applications, Embded Systems etc 
+ -> Python : Python is best for Scientic & Numeric Computing, Machine Learning, AI etc 
+
+=> Java Features :- 
+======================
+1. Simple :- 
+ -> Java is using all the simplified syntax from C & C++ 
+ -> Some C & C++ features were either removed (pointers, multiple inheritance) from java or was created automatic (memory management)
+-> Java has less execution time period and less maintenance (less memory, less power) 
+  
+2. PlatForm Independent:- 
+ -> Java is a platform independent language which means java can be executed on any machine or operating system 
+  
+3. Portable:- 
+ -> Java is portable language as it can be executed on multiple hardwares 
+  
+4. OOP (Object Oriented Programming):- 
+ -> Java is OOP language thus java works around objects 
+ -> Java supports many OOP features like classes, objects and methods, inheritance, polymorphism, abstraction, encapsulation etc. 
+
+5. Security:- 
+ -> Java is very secured language because 
+  1. Java does not have pointers 
+  2. Java has byte code verifier 
+  3. Java has a security manager that defines the access for java classes 
+   
+6. Robust:- 
+ -> Java is Robust i.e. powerful language because  
+  1. Java provides a lot of classes and interfaces to handle the exceptions 
+  2. Automatic Memory Management 
+   
+7. Multithreaded Language:- 
+ -> Java supports multithreading
+
+8. High Performance:- 
+ -> Java has high performance because :- 
+  1. Robust 
+  2. Portable 
+  3. Multithreaded Language etc 
+   
+9. Distributed Applications:- 
+ -> Java can be used for distributed application (enterprise applications) 
+  
+10. Java is compilative and interpretive language
+
+
+What do you mean by Platform Independent?
+==========================================
+- Platform independent means a program can run on different operating systems without changing or recompiling the source code. 
+  The same program can run on Windows, Linux, or macOS."
+- Example : If I write a Java program on Windows, I can run the same compiled file on Linux or macOS without modifying the code.
+
+How is Java Platform Independent?
+===================================
+- Java is platform independent because the Java compiler converts source code into bytecode instead of machine code. 
+  This bytecode can run on any operating system that has a Java Virtual Machine (JVM). 
+  Since every platform has its own JVM, the same bytecode runs everywhere. That's why Java follows the principle 'Write Once, Run Anywhere (WORA).'
+- Explain with Diagram : 
+Java Source Code (.java)
+          │
+          ▼
+      Java Compiler (javac)
+          │
+          ▼
+      Bytecode (.class)
+          │
+          ▼
+        JVM
+          │
+          ▼
+Windows   Linux   macOS
+
+ Is JVM Platform Dependent or Platform Independent?
+======================================================
+- Each operating system has its own JVM implementation.
+- For example:
+Windows uses Windows JVM
+Linux uses Linux JVM
+macOS uses macOS JVM
+- Although the JVM implementation is different for each operating system, they all understand the same Java bytecode.
+- JVM is platform dependent because each operating system requires its own JVM implementation. 
+  However, the bytecode generated by Java is platform independent, so the same bytecode can run on any JVM.
+
+If JVM is platform dependent, then how is Java platform independent?
+=====================================================================
+- The Java compiler generates platform-independent bytecode. Every operating system has its own platform-dependent JVM that understands this bytecode. 
+  Since the bytecode remains the same and only the JVM changes, Java applications can run on different platforms without recompilation
+
+=> What is static or dynamic programming language? 
+==================================================
+- A static programming language performs type checking at compile time. Variables must have a fixed data type before execution.
+- A dynamic programming language performs type checking at runtime, and variable types can change during execution.
+- Example: Static: Java, C, C++ || Dynamic: Python, JavaScript, Ruby
+- Java is mainly a statically typed language, not a dynamically typed language.
+
+=> How java is dynamic programming language ? 
+==============================================
+- Java is not a dynamically typed language, but it has dynamic features.
+- These include:
+1) Dynamic class loading
+2) Runtime object creation
+3) Dynamic memory allocation
+4) Reflection API
+- So, we can say, Java is statically typed, but it provides dynamic features like dynamic class loading and runtime memory allocation.
+
+=> Why java does not require pre-processor ?
+==============================================
+Java does not require a preprocessor because:
+- It does not use macros like C/C++.
+- Features like packages, import statements, constants, and methods replace the need for preprocessing.
+- This makes Java simpler, safer, and easier to maintain.
+- Java doesn't require a preprocessor because it doesn't support macros. 
+  It provides packages, imports, and constants instead, making the language more secure and easier to maintain
+
+=> How java is platform independent ? 
+======================================
+- Java is platform independent because Java source code is compiled into bytecode, not machine code.
+- The bytecode runs on the Java Virtual Machine (JVM), which is available for different operating systems.
+-   Java Source Code
+        ↓
+    Compiler (javac)
+        ↓
+    Bytecode (.class)
+        ↓
+        JVM
+        ↓
+    Windows / Linux / macOS
+- Java is platform independent because the compiler generates bytecode, and the JVM executes the bytecode on any operating system. 
+  That's why Java follows the principle 'Write Once, Run Anywhere'
+
+=> Why java does not support pointers ?
+========================================
+Java does not support pointers because pointers can:
+  - Access memory directly
+  - Cause memory corruption
+  - Reduce security
+  - Increase program complexity
+Instead, Java uses references, which are safer.
+- Java doesn't support pointers to improve security, prevent accidental memory access, and simplify programming. It uses object references instead of pointers.
+
+=> What is call by reference and call by value ? 
+================================================
+1) Call by Value
+- A copy of the variable is passed to the method.
+- Changes inside the method do not affect the original variable.
+- Example: Java
+  int x = 10;
+  change(x);
+  x remains 10 after the method call.
+
+2) Call by Reference
+- The actual memory address is passed.
+- Changes inside the method affect the original variable.
+- Example:
+  void change(int &x)
+
+How Java works :  Java is always call by value.
+For primitive data types, the actual value is copied. For objects, the reference is copied, not the object itself.
+- Java is strictly call by value. For primitive types, the value is copied. For objects, a copy of the reference is passed, 
+allowing object data to be modified, but the reference itself cannot be changed
+
+=> Why java has good memory management as compared to C & C++ ?
+================================================================
+- Java provides automatic memory management through the Garbage Collector (GC).
+Advantages:
+  - Automatically removes unused objects
+  - Prevents memory leaks
+  - Prevents dangling pointers
+  - No need for manual memory allocation and deallocation
+- In C/C++, programmers use malloc/free or new/delete, which can lead to memory leaks if not managed correctly.
+- Java has better memory management because it uses automatic garbage collection. 
+  The JVM automatically frees unused memory, reducing memory leaks and eliminating the need for manual memory management.
+
