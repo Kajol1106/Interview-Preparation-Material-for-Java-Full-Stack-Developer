@@ -1,18 +1,102 @@
-Intoduction ?
-
+Intoruction : 
+==============
 Hello, I'm Kajol Kolagir from Pune. 
-I hold a Bachelor's degree in Computer Applications, 
-which I completed in 2021 from the College of Computer Science and Information Technology, Latur. 
-My passion for understanding how programs work in real life inspired me to pursue this field.
+I completed my Bachelor's degree in Computer Applications in 2021 from the College of Computer Science and Information Technology, Latur. 
+During my graduation, I developed a strong interest in understanding how real-world software systems are designed and how websites work in real life.
 
-To further enhance my skills, I completed a 30-week full stack web development course at Masai School, 
-where I gained hands-on experience with both front-end and back-end technologies.
+To build practical development skills, I completed a 30-week Full Stack Web Development course at Masai School,  
+where I gained hands-on experience with both frontend and backend technologies 
+and worked on several projects for practice purpose.
 
-Following this, I joined Clayfin Pvt Ltd,  where I was trained for 1 and half month and then worked on their main project. 
-My role primarily focused on backend development, resolving production issues, and supporting the deployment process during product releases,
-and connecting with clients to address any issues or provide explanations as needed.
+After that, I started my professional journey with Clayfin Technologies. 
+There I received one and half month training and later worked on their core product. 
+My responsibilities included backend development, resolving production issues, supporting deployment during product releases, 
+and coordinating with clients to understand and resolve technical issues.
 
-In my free time, I enjoy creating and sharing videos on YouTube about my professional development.
+Currently, I worked as a Development Engineer at Prospecta, 
+where I mainly work on backend development in a microservices-based platform. 
+Our system is built using technologies like Spring Boot, Java, gRPC, RabbitMQ, Angular for frontend, and PostgreSQL. 
+My work involves implementing new client-specific features, enhancing existing services, 
+and providing production support for enterprise clients. 
+I regularly analyze logs, identify root causes of issues, 
+and ensure stable releases by implementing both immediate fixes and long-term improvements.
+
+Through this experience, I’ve developed strong debugging skills, 
+a good understanding of distributed systems, 
+and the ability to work in production environments where reliability and quick issue resolution are critical.
+
+===============================================================================================================================================
+
+Tell Me About a Challenging Production Issue
+============================================
+One challenging production issue I handled was related to user onboarding where newly invited users were not receiving invitation emails.
+Since it was a high-priority issue, I first checked whether it was a configuration issue or a code-level issue. 
+I analyzed the application logs and found that the workflow was failing due to a NullPointerException.
+
+After further investigation, I identified that the invitation email template was not configured for that particular tenant. 
+Because the system expected the template to exist, the workflow execution failed and the email was not triggered.
+
+To resolve the immediate issue, I asked the client to configure the required template so they could continue inviting users. 
+For the permanent fix, I modified the code to handle this scenario more gracefully by adding null checks 
+and implementing a fallback mechanism where the system uses a default template if a tenant-specific template is not available.
+
+This prevented the workflow from breaking in such cases and improved the stability of the onboarding process.
+
+===================================================================================================================================================
+
+What Exactly Does Prospecta’s Product Do?
+=============================================
+Prospecta provides enterprise data management solutions, mainly focused on Master Data Management and data governance.
+Large organizations often have multiple systems such as ERP platforms where business data like material data, vendor data, 
+and customer data can become inconsistent or duplicated across departments.
+
+Prospecta’s platform helps organizations manage and maintain clean, standardized, 
+and governed master data through automated workflows, validations, and approval processes.
+
+It ensures data quality, reduces duplication, improves operational efficiency, 
+and helps businesses maintain reliable data across their enterprise systems.
+
+=======================================================================================================================================================
+
+Explain Your Recent Project
+=============================
+In my current role as a Development Engineer at Prospecta, I worked on an enterprise data management platform 
+that helps organizations maintain and govern their master data through configurable workflows.
+
+Recently, I worked on a few important tasks for a newly onboarded enterprise client from the mining industry. 
+My work mainly involved backend development, implementing client-specific features, and resolving production issues.
+
+One feature I implemented was related to our email template system. 
+The platform supports configurable templates such as email notifications and user invitation templates where dynamic fields can be used. 
+For list-type fields, the system previously supported only the internal code value, but the client wanted the display value in emails. 
+I implemented logic to dynamically resolve the value based on the stored code and render it in the template. 
+This was implemented using a feature flag so it could be enabled for specific clients.
+
+I also worked on implementing a synchronization issue in bulk record approval workflows where child records were not syncing correctly along with the parent records. 
+I implemented additional logic to identify child records based on the parent change request, 
+fetch the latest data via gRPC services, and ensure proper syncing across module-based indexes.
+
+Along with development work, I also handled production issues by analyzing logs, 
+identifying root causes, and providing both immediate workarounds and permanent fixes.
+
+================================================================================================================================================================
+
+Explain Your Microservices Architecture
+========================================
+Our platform follows a microservices architecture where each service is responsible for a specific business capability 
+such as record management Core-Crud, core-ui, workflows, notifications, sync and user management.
+
+The frontend is built using Angular, which interacts with backend APIs developed using Spring Boot.
+
+These backend services are designed as independent microservices that communicate with each other. 
+For synchronous communication, we use gRPC when one service needs an immediate response from another service and Rest Endpoint. 
+For asynchronous and event-driven communication, we use RabbitMQ.
+
+The system stores data in PostgreSQL, and the platform is designed as a multi-tenant system where data is segregated using tenant identifiers.
+And to get the data fastly we used the Elastic Search for the searching query.
+
+This architecture allows us to independently scale services, deploy updates faster, 
+and isolate failures without affecting the entire system.
 
 ====================================================================================================================================================
 
@@ -51,10 +135,7 @@ These experiences make me a strong candidate for this role.
 
 Why You left the previous company ?
 
-I decided to leave my previous company because I was on the bench for about 15 days, 
-and the current project no longer required additional resources. I felt that it was a good time for me 
-to seek new challenges and opportunities where I could continue to grow and develop my skills. 
-I’m eager to contribute to a dynamic team and take on responsibilities that will allow me to make a meaningful impact.
+
 
 =====================================================================================================================================
 
