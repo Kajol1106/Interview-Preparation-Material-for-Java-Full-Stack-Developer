@@ -1,0 +1,970 @@
+============================================================
+1. WHAT IS ELASTICSEARCH?
+============================================================
+Elasticsearch is a distributed search and analytics engine built on top of Apache Lucene.
+It is mainly used for fast searching, filtering, logging, analytics, and full-text search.
+Data is stored in indexes, and an index is divided into shards.
+
+============================================================
+2. WHY DO WE USE ELASTICSEARCH?
+============================================================
+We use Elasticsearch when we need very fast searching and filtering over a large amount of data.
+Common use cases:
+- Full-text search
+- Product search
+- Log analysis
+- Application monitoring
+- Autocomplete
+- Filtering and aggregation
+- Analytics
+
+Example:
+In an e-commerce application, users can search for products by name, category, brand, price, and other fields.
+
+============================================================
+3. WHY IS ELASTICSEARCH FAST FOR SEARCH?
+============================================================
+Elasticsearch is fast because it uses Apache Lucene and an inverted index.
+Instead of scanning every document one by one, Elasticsearch can use the index to find matching documents quickly.
+
+============================================================
+4. WHAT IS APACHE LUCENE?
+============================================================
+Apache Lucene is a Java-based search library.
+Elasticsearch is built on top of Lucene and uses Lucene's indexing and searching capabilities.
+
+============================================================
+5. WHAT IS AN INDEX IN ELASTICSEARCH?
+============================================================
+An index is a logical collection of related documents.
+It is similar to a table in a relational database, but it is not exactly the same.
+
+Example:
+Index: products
+
+Documents:
+Product 1
+Product 2
+Product 3
+
+============================================================
+6. WHAT IS A DOCUMENT?
+============================================================
+A document is the basic unit of data stored in Elasticsearch. A document is represented as JSON. 
+So, basically A document is a JSON object that represents one record in Elasticsearch.
+
+Example:
+{
+  "id": 101,
+  "name": "Laptop",
+  "price": 50000,
+  "category": "Electronics"
+}
+
+============================================================
+7. WHAT IS A FIELD?
+============================================================
+A field is a property inside an Elasticsearch document.
+Example:
+{
+  "name": "Laptop",
+  "price": 50000
+}
+
+Here:
+name -> field
+price -> field
+A document contains multiple fields.
+
+============================================================
+8. WHAT IS A SHARD?
+============================================================
+A shard is a partition of an Elasticsearch index.
+When an index becomes large, Elasticsearch divides its data into multiple shards.
+Each shard is backed by a Lucene index.
+
+Purpose:
+- Horizontal scaling
+- Distributing data
+- Distributing search work
+
+============================================================
+9. WHAT IS A PRIMARY SHARD?
+============================================================
+A primary shard is the original shard that stores a portion of an index's data.
+When a document is indexed, Elasticsearch determines which primary shard should store it.
+
+============================================================
+10. WHAT IS A REPLICA SHARD?
+============================================================
+A replica shard is a copy of a primary shard.
+It is used for:
+- High availability
+- Failover
+- Increasing search capacity
+
+Example:
+5 primary shards
+1 replica
+Total shards = 5 primary + 5 replica = 10 shards.
+
+============================================================
+11. WHY DO WE NEED REPLICAS?
+============================================================
+Replicas provide high availability and failover support.
+If a node containing a primary shard fails, Elasticsearch can promote a replica to become the primary.
+Replicas can also help handle search requests because searches can be distributed across primary and replica copies.
+
+============================================================
+12. WHAT IS THE DIFFERENCE BETWEEN PRIMARY AND REPLICA SHARDS?
+============================================================
+Primary shard:
+- Original copy of the data
+- Stores a portion of the index
+
+Replica shard:
+- Copy of a primary shard
+- Used for failover and additional search capacity
+
+Example:
+Primary 1 -> Replica 1
+Primary 2 -> Replica 2
+Primary 3 -> Replica 3
+
+
+============================================================
+13. WHAT IS A NODE?
+============================================================
+A node is a running Elasticsearch instance.
+A node can store shards and participate in search and indexing operations.
+Multiple nodes together form an Elasticsearch cluster.
+Simple:
+Node 1
+Node 2
+Node 3
+Together: Elasticsearch Cluster
+
+============================================================
+14. WHAT IS AN ELASTICSEARCH CLUSTER?
+============================================================
+A cluster is a group of Elasticsearch nodes working together.
+The cluster manages indexes, shards, replicas, searches, and data distribution.
+
+Example:
+Cluster
+  |
+  +-- Node 1
+  +-- Node 2
+  +-- Node 3
+
+============================================================
+15. WHAT IS THE RELATIONSHIP BETWEEN INDEX, SHARD, NODE AND DOCUMENT?
+============================================================
+Cluster
+  -> contains Nodes
+
+Node
+  -> stores Shards
+
+Index
+  -> is divided into Primary Shards
+
+Shard
+  -> contains Documents
+
+Document
+  -> contains Fields
+
+Simple hierarchy:
+Cluster
+  -> Node
+      -> Shard
+          -> Document
+              -> Field
+
+============================================================
+16. WHAT IS AN INVERTED INDEX?
+============================================================
+An inverted index is a data structure used by Lucene to make text searches fast.
+
+Instead of storing only:
+Document -> Words
+
+It also maintains:
+Word -> Documents containing that word
+
+Example:
+Document 1:
+"Java Spring Boot"
+
+Document 2:
+"Java Elasticsearch"
+
+The inverted index can conceptually store:
+Java -> Document 1, Document 2
+Spring -> Document 1
+Elasticsearch -> Document 2
+
+So when we search for "Java", Elasticsearch can quickly find the matching documents.
+
+============================================================
+17. HOW DOES SEARCH WORK IN ELASTICSEARCH?
+============================================================
+A search request is sent to the Elasticsearch cluster.
+Elasticsearch sends the search operation to the relevant shards.
+Each shard performs the search and returns its results.
+The coordinating node combines the results, orders them if required, and returns the final response.
+
+Simple flow:
+Client
+  |
+  v
+Elasticsearch
+  |
+  +--> Shard 1
+  +--> Shard 2
+  +--> Shard 3
+  |
+  v
+Aggregate results
+  |
+  v
+Response
+
+============================================================
+18. WHAT IS A CLUSTER STATE: GREEN, YELLOW AND RED?
+============================================================
+GREEN: All primary and replica shards are allocated and active.
+YELLOW: All primary shards are active, but one or more replica shards are not allocated.
+RED: One or more primary shards are not available.
+
+Simple:
+Green  -> Everything is healthy
+Yellow -> Primary data is available, replicas are missing
+Red    -> Some primary data is unavailable
+
+============================================================
+20. WHAT IS A MAPPING?
+============================================================
+Mapping defines how Elasticsearch stores and indexes fields in a document.
+It defines things such as:
+- Field type
+- Whether a field is searchable
+- How text is analyzed
+
+Example:
+{
+  "name": "Laptop",
+  "price": 50000
+}
+
+Mapping can define:
+name -> text
+price -> integer
+
+============================================================
+21. WHAT ARE COMMON ELASTICSEARCH FIELD TYPES?
+============================================================
+Answer:
+Common types include:
+- text
+- keyword
+- integer
+- long
+- double
+- boolean
+- date
+- object
+- nested
+
+For interviews, especially understand: text vs keyword.
+
+============================================================
+22. WHAT IS THE DIFFERENCE BETWEEN TEXT AND KEYWORD?
+============================================================
+text: Used for full-text search. The value is analyzed into tokens.
+Example: "Java Spring Boot"
+
+It can be searched using words such as:
+Java
+Spring
+Boot
+
+keyword: Stores the value as one exact value and is not analyzed in the same way.
+It is commonly used for:
+- Exact matching
+- Filtering
+- Sorting
+- Aggregations
+
+Example: status = "ACTIVE"
+
+============================================================
+23. WHAT IS ANALYZER IN ELASTICSEARCH?
+============================================================
+An analyzer processes text before it is indexed or searched. It converts text into a form that Elasticsearch can efficiently search
+It can perform operations such as:
+- Tokenization
+- Lowercasing
+- Removing or handling certain words depending on configuration
+
+Example: "Java Spring Boot"
+can be broken into tokens such as:
+java
+spring
+boot
+
+============================================================
+24. WHAT IS TOKENIZATION?
+============================================================
+Tokenization means breaking text into smaller searchable terms called tokens.
+Example: "Java Spring Boot"
+can become:
+Java
+Spring
+Boot
+
+============================================================
+25. WHAT IS A TERM QUERY?
+============================================================
+A term query is used when we want an exact term match, commonly on keyword fields.
+It is mainly used for exact matching and is commonly used with keyword fields
+
+Example:
+{
+  "query": {
+    "term": {
+      "status": "ACTIVE"
+    }
+  }
+}
+
+============================================================
+26. WHAT IS A MATCH QUERY?
+============================================================
+A match query is commonly used for full-text search.
+Elasticsearch analyzes the search text and looks for matching terms.
+
+Example:
+{
+  "query": {
+    "match": {
+      "name": "Java Developer"
+    }
+  }
+}
+
+============================================================
+28. WHAT IS BOOL QUERY?
+============================================================
+Bool query allows us to combine multiple queries.
+Common clauses:
+- must
+- should
+- must_not
+- filter
+
+Example requirement:
+Find products where:
+- category is Electronics
+- price is less than 50000
+- name contains Laptop
+A bool query can combine these conditions.
+
+============================================================
+29. WHAT IS FILTER IN ELASTICSEARCH?
+============================================================
+A filter is used when we want to filter documents based on a condition.
+For example:
+- status = ACTIVE
+- price between 1000 and 5000
+- category = Electronics
+Filters are useful when we do not need relevance scoring for that condition.
+
+============================================================
+30. WHAT IS SCORING IN ELASTICSEARCH?
+============================================================
+For many full-text queries, Elasticsearch calculates a relevance score to determine how well each document matches the search.
+Documents with a higher score are generally considered more relevant.
+
+============================================================
+31. WHAT IS AN AGGREGATION?
+============================================================
+Aggregation is used for analytics and summarizing data.
+
+Examples:
+- Count products by category
+- Average price
+- Maximum price
+- Minimum price
+- Sales by month
+
+Example: We can find how many products exist in each category.
+
+============================================================
+32. SEARCH VS AGGREGATION
+============================================================
+Search: Used to find matching documents.
+Aggregation: Used to calculate or summarize information from documents.
+
+Example:
+Search: Find all laptops.
+Aggregation: Count how many laptops exist in each brand.
+
+============================================================
+33. WHAT IS THE REINDEX API?
+============================================================
+The Reindex API copies documents from one index to another.
+It is commonly used when we need to:
+- Change mapping
+- Change index structure
+- Migrate data
+- Create a new index
+- Change shard configuration
+
+Example:
+POST _reindex
+{
+  "source": {
+    "index": "old_index"
+  },
+  "dest": {
+    "index": "new_index"
+  }
+}
+
+============================================================
+34. WHY IS REINDEXING REQUIRED WHEN WE CHANGE MAPPING?
+============================================================
+Some existing field mappings cannot simply be changed in place.
+For example, if a field was created with an incompatible type, we generally create a new index with the correct mapping 
+and reindex the old data into it.
+
+Flow:
+Old Index
+   |
+   v
+New Index with correct mapping
+   |
+   v
+Reindex data
+
+============================================================
+35. CAN WE CHANGE THE NUMBER OF PRIMARY SHARDS AFTER INDEX CREATION?
+============================================================
+The number of primary shards is normally fixed when the index is created.
+
+If we need a different number of primary shards, a common approach is:
+1. Create a new index with the desired number of shards.
+2. Reindex the data.
+3. Switch the application to the new index, often using an alias.
+
+============================================================
+36. WHAT IS AN INDEX ALIAS?
+============================================================
+An alias is a logical name that points to one or more Elasticsearch indexes.
+It allows applications to use a stable name while the actual index can change.
+
+Example:
+Application uses: products
+Alias: products -> products_v1
+Later: products -> products_v2
+This is useful during zero-downtime reindexing and index migrations.
+
+============================================================
+37. HOW WOULD YOU PERFORM ZERO-DOWNTIME REINDEXING?
+============================================================
+A common approach is:
+1. Create a new index, for example products_v2.
+2. Define the new mapping/settings.
+3. Reindex data from products_v1 to products_v2.
+4. Validate the new index.
+5. Switch the alias from products_v1 to products_v2.
+6. Application continues using the same alias.
+
+Flow:
+products alias
+     |
+     v
+products_v1
+
+After migration:
+
+products alias
+     |
+     v
+products_v2
+This avoids changing the application code to a new physical index name.
+
+============================================================
+38. WHAT IS ELASTICSEARCH CRUD?
+============================================================
+CRUD means:
+Create
+Read
+Update
+Delete
+
+Examples:
+Create/Index: PUT /products/_doc/101
+Read: GET /products/_doc/101
+Update: POST /products/_update/101
+Delete: DELETE /products/_doc/101
+
+============================================================
+39. WHAT IS THE DIFFERENCE BETWEEN INDEX AND SEARCH?
+============================================================
+Indexing means adding or updating documents in Elasticsearch.
+Searching means finding documents that match a query.
+
+Example:
+Index: Store a product document.
+Search: Find products where name contains "Laptop".
+
+============================================================
+40. WHAT IS FULL-TEXT SEARCH?
+============================================================
+Full-text search means searching text based on words and their meaning/relevance rather than requiring an exact complete value.
+
+Example: If a product name is: "Java Spring Boot Developer Book"
+A full-text search for: "Spring Developer"
+can find the document even though the complete text is not exactly the same.
+Elasticsearch is especially good for this type of search.
+
+============================================================
+41. WHAT IS ELASTICSEARCH REST API?
+============================================================
+Elasticsearch exposes REST APIs over HTTP.
+Applications can use HTTP methods such as:
+- GET
+- POST
+- PUT
+- DELETE
+
+Example: GET /products/_search
+The request and response are commonly represented using JSON.
+
+============================================================
+42. HOW DO YOU CONNECT ELASTICSEARCH WITH SPRING BOOT?
+============================================================
+In Spring Boot, we can use Spring Data Elasticsearch or the Elasticsearch Java client, depending on the project and 
+Elasticsearch version.
+
+Typical steps:
+1. Add the required Elasticsearch dependency.
+2. Configure the Elasticsearch connection.
+3. Create document/model classes.
+4. Create repositories or use the Java client.
+5. Implement search and indexing operations.
+6. Handle errors and connection configuration.
+
+============================================================
+43. WHAT IS THE DIFFERENCE BETWEEN A RELATIONAL DATABASE AND ELASTICSEARCH?
+============================================================
+Relational Database:
+- Tables and rows
+- Relationships
+- SQL
+- Joins
+- Strong transactional use cases
+- Good for structured business data
+
+Elasticsearch:
+- Indexes and JSON documents
+- Search-oriented
+- Full-text search
+- Inverted index
+- Distributed search
+- Excellent for search and analytics
+
+Common architecture:
+Application
+   |
+   +--> MySQL/PostgreSQL
+   |
+   +--> Elasticsearch
+The relational database can remain the source of truth while Elasticsearch is used for fast search.
+
+
+============================================================
+44. WHY NOT USE MYSQL LIKE ELASTICSEARCH FOR FULL-TEXT SEARCH?
+============================================================
+Traditional databases can support text search, but Elasticsearch is specifically designed for distributed full-text search and analytics.
+
+Elasticsearch provides:
+- Inverted indexes
+- Relevance scoring
+- Distributed search
+- Powerful text analysis
+- Fast filtering and aggregations
+So for complex search requirements over large datasets, Elasticsearch is often a better fit.
+
+
+============================================================
+45. WHAT HAPPENS WHEN A NODE FAILS?
+============================================================
+If a node fails, Elasticsearch detects the failure.
+If replica shards are available on other nodes, Elasticsearch can promote replicas to primary shards.
+This helps maintain availability.
+
+Example:
+Node 1:
+Primary shard
+Node 2:
+Replica shard
+
+If Node 1 fails: Node 2 replica can be promoted to primary.
+
+============================================================
+46. WHAT HAPPENS IF THERE ARE NO REPLICAS AND A NODE FAILS?
+============================================================
+If a node containing a primary shard fails and there is no replica for that shard, that shard becomes unavailable.
+The cluster may become yellow or red depending on which shards are affected and whether primary shards are missing.
+This is why replicas are important for production systems.
+
+============================================================
+47. WHAT IS SHARD ALLOCATION?
+============================================================
+Shard allocation means deciding which nodes should hold primary and replica shards.
+Elasticsearch distributes shards across nodes to balance data and workload and to avoid putting a primary and 
+its replica on the same node when possible.
+
+============================================================
+48. WHAT IS HORIZONTAL SCALING IN ELASTICSEARCH?
+============================================================
+Horizontal scaling means adding more nodes to the Elasticsearch cluster.
+Instead of only increasing the resources of one machine, we add more machines/nodes and distribute shards across them.
+
+Example:
+Before:
+Node 1
+
+After:
+Node 1
+Node 2
+Node 3
+
+This helps Elasticsearch handle more data and search/indexing workload.
+
+============================================================
+49. WHAT IS THE DIFFERENCE BETWEEN HORIZONTAL AND VERTICAL SCALING?
+============================================================
+Vertical scaling: Increase CPU, RAM, or other resources of an existing node.
+Horizontal scaling: Add more nodes to the cluster.
+
+Simple:
+Vertical -> Bigger machine
+Horizontal -> More machines
+
+============================================================
+50. WHAT IS A COORDINATING NODE?
+============================================================
+A node receiving a search request can act as the coordinating node for that request.
+It sends the request to the relevant shards, receives their responses, combines the results, 
+and sends the final response to the client.
+
+============================================================
+51. WHAT IS THE DIFFERENCE BETWEEN INDEXING AND SEARCHING IN A DISTRIBUTED SYSTEM?
+============================================================
+Indexing: The document is routed to the appropriate primary shard and then replicated as required.
+Searching: The request is sent to relevant shards, each shard searches its local data, and the results are combined.
+
+Simple:
+Indexing: Client -> Primary shard -> Replica
+Searching: Client -> Relevant shards -> Aggregate -> Client
+
+============================================================
+52. WHAT IS DOCUMENT ID?
+============================================================
+A document ID uniquely identifies a document within an index.
+
+Example: PUT /products/_doc/101
+Here:
+products -> index
+101 -> document ID
+The ID can be supplied by the application or generated by Elasticsearch depending on how the document is indexed.
+
+
+============================================================
+53. WHAT IS THE DIFFERENCE BETWEEN PUT AND POST IN ELASTICSEARCH?
+============================================================
+PUT is commonly used when we know the resource/document ID.
+Example:
+PUT /products/_doc/101
+POST can be used for operations where Elasticsearch generates the document ID or for APIs such as search and update.
+
+Example:
+POST /products/_doc
+Elasticsearch can generate the ID.
+
+Simple:
+PUT -> Often used with a known ID
+POST -> Often used when the server generates an ID or for specific APIs
+
+============================================================
+54. WHAT IS A NESTED TYPE?
+============================================================
+Nested is a special field type used when we need to preserve relationships between objects inside an array.
+It is useful when an array contains multiple objects and we need to query each object independently.
+
+============================================================
+55. WHAT ARE COMMON ELASTICSEARCH PROBLEMS YOU CAN TROUBLESHOOT?
+============================================================
+Common problems include:
+- Cluster becomes yellow or red
+- Search is slow
+- Indexing is slow
+- High JVM/memory usage
+- Too many shards
+- Missing replicas
+- Incorrect mapping
+- Incorrect analyzer
+- Query is too expensive
+- Disk space is low
+
+Basic troubleshooting:
+1. Check cluster health.
+2. Check node health and resource usage.
+3. Check shard allocation.
+4. Check mappings.
+5. Check the query.
+6. Check indexing/search performance.
+7. Check logs.
+
+============================================================
+56. WHAT IS THE MOST COMMON ELASTICSEARCH MISTAKE WITH MAPPINGS?
+============================================================
+A common mistake is defining a field with the wrong type or not planning the mapping according to how the field will be searched.
+For example:
+If a field needs exact filtering and sorting, keyword may be appropriate.
+If it needs full-text search, text may be appropriate.
+Changing an existing mapping can require creating a new index and reindexing the data.
+
+============================================================
+57. HOW WOULD YOU DESIGN PRODUCT SEARCH USING ELASTICSEARCH?
+============================================================
+I would keep product data in the primary database and index searchable product information in Elasticsearch.
+
+For example:
+Product:
+- ID
+- Name
+- Description
+- Category
+- Brand
+- Price
+
+In Elasticsearch:
+- name -> text
+- description -> text
+- category -> keyword
+- brand -> keyword
+- price -> numeric
+
+Then Elasticsearch can handle:
+- Full-text search
+- Filtering
+- Sorting
+- Aggregations
+
+The database remains the source of truth, while Elasticsearch is optimized for search.
+
+============================================================
+58. WHAT IS AN ELASTICSEARCH INDEXING FLOW?
+============================================================
+Application
+    |
+    v
+Elasticsearch
+    |
+    v
+Primary Shard
+    |
+    v
+Replica Shard
+The document is routed to a primary shard. After the primary processes the write, the data is replicated to the relevant replica shards.
+
+============================================================
+59. WHAT IS A GOOD REAL-WORLD ELASTICSEARCH USE CASE?
+============================================================
+A good example is product search.
+Suppose an e-commerce website has millions of products.
+A user searches: "black running shoes"
+Elasticsearch can quickly search product names/descriptions, calculate relevance, filter by brand or price, 
+sort results, and provide aggregations such as product counts by brand.
+
+This is much more search-oriented than simply querying a relational database.
+
+============================================================
+60. HOW WOULD YOU EXPLAIN ELASTICSEARCH IN A SPRING BOOT PROJECT?
+============================================================
+In a Spring Boot application, Elasticsearch can be used as a search layer. We keep the main business data in the 
+relational database and index the searchable data into Elasticsearch.
+
+When a user performs a search, the application sends a query to Elasticsearch instead of doing complex full-text 
+searches directly in the database.
+
+Elasticsearch searches its inverted index across the relevant shards and returns the matching documents. 
+We can also use filters, sorting, relevance scoring, and aggregations.
+
+When the business data changes, we need to keep the Elasticsearch index synchronized with the source database."
+
+
+============================================================
+61. HOW DO YOU KEEP ELASTICSEARCH AND DATABASE DATA IN SYNC?
+============================================================
+A simple approach is:
+1. Update the database.
+2. Update or index the corresponding Elasticsearch document.
+For larger systems, applications may use events or messaging such as Kafka to asynchronously update Elasticsearch.
+Database update
+      |
+      v
+Publish event
+      |
+      v
+Kafka
+      |
+      v
+Elasticsearch indexing
+The exact approach depends on the system architecture.
+
+============================================================
+62. WHAT IS EVENTUAL CONSISTENCY IN ELASTICSEARCH?
+============================================================
+Elasticsearch is designed around distributed systems and can provide near real-time search rather than immediate 
+visibility of every write.
+A newly indexed document may not be searchable immediately in every situation.
+
+============================================================
+63. WHAT DOES NEAR REAL-TIME SEARCH MEAN?
+============================================================
+Elasticsearch is often described as near real-time because indexed documents generally become searchable after a 
+short refresh interval rather than instantly.
+
+============================================================
+64. WHAT IS THE DIFFERENCE BETWEEN ELASTICSEARCH AND REDIS?
+============================================================
+Elasticsearch:
+- Search and analytics engine
+- Full-text search
+- Inverted index
+- Distributed search
+- Relevance scoring
+- Aggregations
+
+Redis:
+- In-memory data structure store
+- Commonly used for caching
+- Key-value access
+- Low-latency data access
+- Pub/Sub
+- Counters and other data structures
+
+============================================================
+66. QUICK REVISION SHEET
+============================================================
+
+Elasticsearch:
+Distributed search and analytics engine built on Apache Lucene.
+
+Index:
+Collection of related JSON documents.
+
+Document:
+JSON object stored in an index.
+
+Field:
+Property inside a document.
+
+Shard:
+Partition of an index.
+
+Primary:
+Original shard containing data.
+
+Replica:
+Copy of a primary shard.
+
+Node:
+Running Elasticsearch instance.
+
+Cluster:
+Group of Elasticsearch nodes.
+
+Inverted Index:
+Data structure that maps terms to documents for fast text search.
+
+Mapping:
+Defines field types and indexing behavior.
+
+Text:
+Used for full-text search.
+
+Keyword:
+Used for exact matching, filtering, sorting, and aggregations.
+
+Analyzer:
+Processes text into searchable tokens.
+
+Match:
+Full-text query.
+
+Term:
+Exact term query.
+
+Bool:
+Combines multiple query conditions.
+
+Filter:
+Filters documents without relying on relevance scoring for that condition.
+
+Aggregation:
+Used for analytics and summarization.
+
+Green:
+All primary and replica shards active.
+
+Yellow:
+Primary shards active, some replicas missing.
+
+Red:
+One or more primary shards unavailable.
+
+Reindex:
+Copies documents from one index to another.
+
+Alias:
+Logical name pointing to an index or indexes.
+
+Replication:
+Copies primary shard data to replicas.
+
+Horizontal scaling:
+Adding more Elasticsearch nodes.
+
+Elasticsearch vs Redis:
+Elasticsearch -> Search and analytics.
+Redis -> Fast in-memory data access and caching.
+
+Best project answer:
+Use Elasticsearch as a search layer, keep the primary data in the relational database, index searchable fields into Elasticsearch, perform fast search/filtering/aggregation there, and keep the index synchronized with database changes.
+
+
+============================================================
+67. IMPORTANT INTERVIEW CORRECTIONS / VERSION NOTE
+============================================================
+
+Do not memorize statements such as:
+"Elasticsearch 7.x cannot change shard count after index creation" without context.
+
+A safer interview statement is:
+"The number of primary shards is normally fixed when an index is created. If we need a different primary shard count, 
+a common approach is to create a new index and reindex the data."
+
+Also remember:
+- Modern Elasticsearch uses data streams and newer APIs in addition to traditional indexes.
+- Elasticsearch is built on Apache Lucene.
+- Replica shards are copies of primary shards.
+- Primary/replica terminology is preferred over master/slave terminology.
+- Always explain Elasticsearch based on the version used in your project if the interviewer asks version-specific questions.

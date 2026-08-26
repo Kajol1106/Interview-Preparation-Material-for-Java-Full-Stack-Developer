@@ -1,200 +1,282 @@
-🔹 What are Microservices?
-================================
-Microservices is an architecture where an application is built as small independent services.
+Q1. What are Microservices?
+--------------------------------------------------------------
+Microservices is an architecture style where a big application is broken down into small, independent services. 
+Each service does one specific job, has its own database, can be deployed on its own, and
+talks to other services using APIs like REST, gRPC, or messaging systems like RabbitMQ/Kafka.
 
-Each service:
-Does one specific job
-Has its own database
-Can be deployed independently
-Communicates using APIs (REST/gRPC/Messaging)
-👉 Opposite of Monolithic Architecture.
-
-🔹 Monolith vs Microservices (Simple Example)
-=============================================
-🏢 Monolithic App
-One big application containing:
-Order
-Payment
-Shipping
-Notification
-
-Problems ❌
-Small change → redeploy whole app
-One bug → whole app down
-Hard to scale
+Example : Think of an e-commerce app. Instead of one big application handling
+everything, we split it into Order Service, Payment Service, Shipping Service, and Notification Service. 
+Each one is a separate small application that can be built, tested, and deployed on its own.
 
 
-🧩 Microservices App
-========================
-Split into services:
-Order Service
-Payment Service
-Shipping Service
-Notification Service
+Q2. What is the difference between Monolithic and Microservices architecture?
+--------------------------------------------------------------
+MONOLITHIC:
+- Everything (Order, Payment, Shipping, Notification) is inside one single application and deployed as one unit (one WAR/JAR).
+- Problems: a small change means redeploying the entire app, one bug can bring down the whole system, 
+and scaling is hard because you can only scale the whole app, not a specific part of it.
 
-Benefits ✅
-Deploy independently
-Scale independently
-Failure isolation
-
-
-🔹 Advantages of Microservices
-==============================
-✔ Independent deployment
-✔ Better scalability
-✔ Faster development
-✔ Technology flexibility
-✔ Fault isolation
-
-🔹 Disadvantages of Microservices
-=================================
-❌ Complex architecture
-❌ Network latency
-❌ Distributed debugging is hard
-❌ Requires DevOps & monitoring
-
-👉 Interview tip: Always mention both pros & cons.
-
-Q3. Why companies move from Monolith to Microservices?
-=======================================================
-To improve:
-Scalability
-Reliability
-Faster deployments
-Independent teams
-
-Q4. What is API Gateway?
-===========================
-Single entry point for all clients.
-Responsibilities:
-Routing requests
-Authentication
-Rate limiting
-Logging
-ex., Client → API Gateway → Services
+MICROSERVICES:
+- Same features are split into separate services - Order Service,
+  Payment Service, Shipping Service, Notification Service - each running and deployed independently.
+- Benefits: you can deploy one service without touching the others, scale only the service that needs it, 
+and if one service crashes, the rest keep working.
 
 
+Q3. What are the advantages and disadvantages of Microservices?
+--------------------------------------------------------------
+ADVANTAGES:
+- Independent deployment - deploy one service without redeploying everything
+- Better scalability - scale only the service that is under heavy load
+- Faster development - different teams can work on different services in parallel
+- Technology flexibility - one service can be in Java, another in Python, based on what fits best
+- Fault isolation - failure in one service does not crash the whole system
 
-Q5. How do microservices communicate?
-=======================================
-Two ways:
-1️⃣ Synchronous Communication
-REST API
-gRPC
+DISADVANTAGES:
+- Complex architecture - many moving parts to manage
+- Network latency - services call each other over the network, which is slower than an in-process method call
+- Distributed debugging is hard - a single user request might pass through 4-5 services, making it harder to trace where it failed
+- Requires strong DevOps and monitoring setup - you need tools for logging, tracing, deployment automation, etc.
 
-2️⃣ Asynchronous Communication
-RabbitMQ
-Kafka
-
-Interview tip:
-Use both together.
-
-
-Q6. What is Service Discovery?
-=================================
-Services must find each other dynamically.
-Instead of hardcoding URLs: ex., Order Service → http://payment-service:8080 ❌
-Use service registry: Order Service → Service Registry → Payment Service ✅
-
-Tools:
-Eureka
-Consul
-
-Q7. What is Database per Service?
-======================================
-Each microservice has its own database.
-
-Why?
-Avoid tight coupling
-Independent scaling
-Independent schema changes
-❌ Never share DB between services.
+Q4. Why do companies move from Monolith to Microservices?
+--------------------------------------------------------------
+Mainly to improve:
+- Scalability - scale only the busy parts of the system, not everything
+- Reliability - one service failing doesn't take down the entire app
+- Faster deployments - teams can release their service anytime without waiting for other teams
+- Independent teams - different teams can own different services and work without blocking each other
 
 
-Q8. What is Distributed Transaction Problem?
-===============================================
-Multiple services → multiple databases.
-One service fails → data becomes inconsistent.
+Q5. What is an API Gateway?
+--------------------------------------------------------------
+API Gateway is a single entry point through which all client requests pass before reaching the actual microservices.
+Its responsibilities:
+- Routing the request to the correct service
+- Authentication - checking if the user/token is valid
+- Rate limiting - preventing too many requests from overloading services
+- Logging - keeping track of incoming requests
 
-Example:
-Order created ✅
-Payment failed ❌
-
-Solution:
-👉 Saga Pattern
-
+FLOW: Client -> API Gateway -> Order Service / Payment Service / etc.
 
 
-Q9. What is Saga Pattern? ⭐ (Very Important)
-===============================================
-Handles distributed transactions.
+Q6. How do microservices communicate with each other?
+--------------------------------------------------------------
+There are two ways:
+1. SYNCHRONOUS COMMUNICATION
+   The caller waits for an immediate response.
+   Tools: REST API, gRPC
+   Example: Order Service calls Payment Service and waits to know if the payment succeeded or failed before moving forward.
 
-Two Types:
-Choreography (event-based)
-Orchestration (central controller) : Managing multiple containers. (Kubernets)
-
-Example: Order → Payment → Inventory → Email
-If payment fails:
-Order is cancelled (rollback).
-
-
-Q10. What is Circuit Breaker?
-===============================
-Prevents calling a failing service repeatedly.
-
-Example:
-Payment service down ❌
-Circuit breaker stops calling it.
-
-Tool:
-Resilience4j
+2. ASYNCHRONOUS COMMUNICATION
+   The caller doesn't wait; the message is processed later.
+   Tools: RabbitMQ, Kafka
+   Example: Order Service publishes an "order placed" event, and
+   Notification Service picks it up whenever it's ready to send the email/SMS.
 
 
-Q11. What is Load Balancing?
-===============================
-Distributes traffic among multiple service instances.
-ex., 
-Order Service (3 instances)
-Requests distributed equally.
+Q7. What is Service Discovery?
+--------------------------------------------------------------
+In microservices, service instances can start, stop, or scale up/down dynamically, so their IP addresses/URLs keep changing. 
+Service Discovery lets services find each other dynamically instead of using hardcoded URLs.
+
+WITHOUT Service Discovery (bad way):
+Order Service calls Payment Service using a fixed URL like
+"http://payment-service:8080" - this breaks if Payment Service moves to a different host or port.
+
+WITH Service Discovery (correct way):
+Order Service asks a Service Registry, "Where is Payment Service
+currently running?" and the registry returns the current address/instance to call.
+
+TOOLS: Eureka, Consul
+
+SIMPLE EXAMPLE:
+"It's like calling a company's reception desk instead of memorizing
+each employee's direct extension. The reception desk (Service Registry) always knows where to route your call, 
+even if the employee (service instance) has moved desks."
 
 
-Q12. What is Fault Tolerance?
-================================
-System continues working even if one service fails.
+Q8. What is "Database per Service"? Why is it important?
+--------------------------------------------------------------
+Each microservice should have its own separate database, and no other service should directly access that database.
 
-Techniques:
-Retry
-Circuit breaker
-Fallback methods
+WHY:
+- Avoids tight coupling between services
+- Each service can scale its database independently
+- Each service can change its schema without affecting other services
+- Prevents one service's heavy database usage from slowing down another service
 
+RULE TO REMEMBER: Never share a database between two services -
+if Order Service needs data owned by Payment Service, it should call
+Payment Service's API, not query Payment Service's database directly.
 
-Q13. What is Observability?
-==============================
-Monitoring microservices using:
-Logging
-Metrics
-Tracing
+Q9. What is the Distributed Transaction Problem?
+--------------------------------------------------------------
+In microservices, one business operation often spans multiple services, and each service has its own database. If one step
+succeeds but a later step fails, the data across services becomes inconsistent, because there is no single database transaction
+covering all of them.
 
-Tools:
-ELK Stack
-Prometheus
-Grafana
-Zipkin
+SIMPLE EXAMPLE:
+"Order Service creates an order successfully and marks it as 'CREATED'. Then it calls Payment Service, but the payment fails. 
+Now we have an order marked as created, but no successful payment behind it - the data is inconsistent across the two services."
 
-
-Q14. What is Containerization?
-=================================
-Packaging service with its dependencies.
-
-Tool:
-Docker
+SOLUTION: Saga Pattern (explained next)
 
 
-🔹 Microservices Design Patterns
-====================================
-Important patterns to mention in interview:
-API Gateway Pattern
-Saga Pattern ⭐
-Circuit Breaker Pattern ⭐
-Service Discovery Pattern
-Database per Service Pattern
+Q10. What is the Saga Pattern? (Very Important)
+--------------------------------------------------------------
+Saga Pattern is a way to manage distributed transactions across multiple microservices by breaking one big transaction 
+into a series of smaller local transactions, where each step has a corresponding
+"compensating" (undo) action if something fails later.
+
+TWO TYPES:
+1. CHOREOGRAPHY (Event-based)
+   Each service listens for events and reacts on its own; there's no
+   central controller. Every service knows what to do when it receives a certain event.
+
+2. ORCHESTRATION (Central controller)
+   One central service (orchestrator) tells each service what to do
+   step by step and decides what happens next based on the response.
+
+FLOW EXAMPLE: Order -> Payment -> Inventory -> Email
+If Payment fails: The Saga triggers a compensating action - the Order that was created
+gets cancelled/rolled back, instead of leaving it in an inconsistent "CREATED" state forever.
+
+SIMPLE EXAMPLE:
+"It's like booking a flight and hotel together. If the flight is booked but the hotel booking fails, 
+the system automatically cancels the flight booking too, instead of leaving you with a flight but no hotel."
+
+
+Q11. What is a Circuit Breaker?
+--------------------------------------------------------------
+Circuit Breaker is a pattern that prevents a service from repeatedly calling another service that is already failing or down. 
+Instead of wasting time and resources on calls that will likely fail anyway, the
+circuit breaker "opens" and stops those calls for a while, optionally returning a fallback response.
+
+TOOL: Resilience4j (commonly used with Spring Boot)
+
+SIMPLE EXAMPLE:
+"If Payment Service is down and Order Service keeps calling it again
+and again for every new order, it wastes time and can slow down Order
+Service too. A circuit breaker detects the repeated failures, 'trips'
+open, and stops calling Payment Service for a short period, maybe
+returning a fallback message like 'Payment service temporarily
+unavailable, please try again' instead."
+
+HOW IT WORKS (3 states, good to mention):
+- CLOSED - normal state, calls go through as usual
+- OPEN - too many failures happened, so calls are blocked immediately without even trying
+- HALF-OPEN - after a wait time, it allows a few test calls to check if the service has recovered; if yes, it goes back to CLOSED
+
+
+Q12. What is Load Balancing?
+--------------------------------------------------------------
+Load Balancing means distributing incoming traffic across multiple instances of the same service so that 
+no single instance gets overloaded.
+
+SIMPLE EXAMPLE:
+"If Order Service has 3 running instances, a load balancer makes sure
+requests are spread roughly equally across all 3 - instance 1 doesn't get 1000 requests while instance 2 and 3 sit idle."
+
+
+Q13. What is Fault Tolerance?
+--------------------------------------------------------------
+Fault Tolerance means the overall system keeps working even if one or more services fail, instead of the entire application going down.
+
+COMMON TECHNIQUES:
+- Retry - automatically try the call again if it fails, usually for temporary/network issues
+- Circuit Breaker - stop calling a service that's repeatedly failing
+- Fallback methods - return a default/cached response when the actual ervice call fails
+
+SIMPLE EXAMPLE:
+"If the Recommendation Service is down on a shopping app, instead of
+showing an error page, the system can show a fallback like 'popular products' list, so the 
+user experience is not completely broken."
+
+
+Q14. What is Observability in Microservices?
+--------------------------------------------------------------
+Observability means being able to understand what is happening inside
+a distributed system - especially useful because with many services,
+it's hard to know where something went wrong just by looking at one service's logs.
+
+THREE MAIN PILLARS:
+- Logging - recording what happened in each service (errors, events)
+- Metrics - numeric data like request count, response time, error rate
+- Tracing - following a single request as it travels across multiple
+services, to see exactly where the delay or failure happened
+
+TOOLS: ELK Stack (logging), Prometheus + Grafana (metrics), Zipkin (distributed tracing)
+
+SIMPLE EXAMPLE:
+"If a user complains an order took 10 seconds to place, distributed
+tracing (Zipkin) can show that the request passed through Order
+Service (200ms), Payment Service (300ms), and got stuck for 9 seconds
+in Inventory Service - pinpointing exactly which service caused the delay."
+
+
+Q15. What is Containerization? Why is it important for Microservices?
+--------------------------------------------------------------
+Containerization means packaging a service along with everything it
+needs to run (code, libraries, runtime, configuration) into a single
+unit called a container, so it runs the same way on any machine.
+
+TOOL: Docker
+
+WHY IMPORTANT FOR MICROSERVICES:
+- Since there are many services, each possibly needing different
+  dependencies/versions, containers keep them isolated from each other
+- Makes deployment consistent - "it works on my machine" problems are
+  reduced because the container carries its own environment
+- Makes it easy to scale up/down - just start more containers of the same service
+
+SIMPLE EXAMPLE:
+"Order Service might need Java 17, while an older Notification
+Service still runs on Java 8. With Docker, each service runs in its
+own container with its own required environment, without conflicting with each other on the same machine."
+
+
+====================================================================
+Q16. Microservices Design Patterns - quick list to mention
+====================================================================
+1. API Gateway Pattern - single entry point for all client requests
+2. Saga Pattern - managing distributed transactions across services
+3. Circuit Breaker Pattern - stopping repeated calls to a failing service
+4. Service Discovery Pattern - services finding each other dynamically instead of hardcoded URLs
+5. Database per Service Pattern - each service owns its own database
+
+====================================================================
+BONUS - QUICK ONE-LINERS FOR RAPID FIRE ROUND
+====================================================================
+Q: What is the opposite of Microservices architecture?
+A: Monolithic architecture, where everything runs as one single application.
+
+Q: Name two synchronous and two asynchronous communication methods.
+A: Synchronous - REST, gRPC. Asynchronous - RabbitMQ, Kafka.
+
+Q: What tool is commonly used for Service Discovery in Spring-based microservices?
+A: Netflix Eureka (or Consul).
+
+Q: What tool is commonly used for Circuit Breaker in Spring Boot?
+A: Resilience4j.
+
+Q: What are the two types of Saga pattern?
+A: Choreography (event-based, no central controller) and Orchestration (a central service coordinates all steps).
+
+Q: Name three pillars of Observability.
+A: Logging, Metrics, and Tracing.
+
+Q: What tool is used for containerizing microservices?
+A: Docker (and often managed/orchestrated using Kubernetes).
+
+Q: Why should you never share a database between two microservices?
+A: Because it creates tight coupling - a schema change in one service
+   could break another service, defeating the purpose of independent deployment.
+
+Q: What is the difference between Retry and Circuit Breaker?
+A: Retry tries the same failed call again hoping it succeeds this
+   time. Circuit Breaker stops calling a service altogether once it
+   detects repeated failures, to avoid wasting resources.
+
+====================================================================
+END OF DOCUMENT
+====================================================================

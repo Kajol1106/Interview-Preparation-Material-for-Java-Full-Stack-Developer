@@ -1,0 +1,769 @@
+============================================================
+1. WHAT IS REDIS?
+============================================================
+Redis is an in-memory data structure store. It can be used as a database, cache, and message broker.
+Because Redis stores data primarily in memory, it provides very fast read and write operations.
+It supports data structures such as String, Hash, List, Set, and Sorted Set.
+In Spring Boot applications, Redis is commonly used for caching frequently accessed data, session management, 
+counters, and real-time applications.
+
+Simple answer:
+Redis is a fast, in-memory key-value store that we commonly use for caching frequently accessed data.
+
+============================================================
+2. IF REDIS IS A DATABASE, WHY DON'T WE USE IT AS THE MAIN DATABASE EVERYWHERE?
+============================================================
+Redis can be used as a primary database, but it is not always the best choice for every application.
+Redis is extremely fast because it primarily uses memory, but traditional databases such as MySQL or PostgreSQL 
+are generally better for complex queries, relationships, large persistent datasets, and traditional transactional requirements.
+Redis is commonly used as a cache while MySQL or PostgreSQL acts as the primary source of truth.
+
+Good interview answer:
+Redis can work as a database, cache, or message broker. We choose based on the application requirement. 
+Redis is very fast because it primarily works with memory, but for complex SQL queries, relationships, 
+large persistent datasets, and traditional transactional features, databases like MySQL or PostgreSQL are usually more suitable.
+
+============================================================
+3. WHY IS REDIS FAST?
+============================================================
+Redis is fast mainly because it stores data in memory, so it does not need to access disk for every read and write operation.
+It also uses efficient data structures and a lightweight request-processing model.
+Example:
+Application -> Redis -> Response
+Instead of:
+Application -> Database -> Response
+
+============================================================
+4. WHY DO WE USE REDIS WITH A DATABASE?
+============================================================
+We use Redis as a caching layer in front of the database.
+If the same data is requested frequently, instead of querying the database every time, we store that data in Redis.
+This reduces database load and improves application response time.
+Example:
+First request:
+Application -> Redis -> Cache Miss -> Database -> Redis -> Application
+
+Next request:
+Application -> Redis -> Response
+
+============================================================
+5. WHAT IS CACHING?
+============================================================
+Caching means temporarily storing frequently accessed data in a faster storage layer so that we can retrieve it quickly 
+instead of fetching it from the database every time.
+
+Example:
+If product information is requested 10,000 times, we can fetch it from the database once and store it in Redis. 
+The following requests can be served from Redis.
+
+============================================================
+6. WHAT IS A CACHE HIT AND CACHE MISS?
+============================================================
+Cache Hit:
+When requested data is already available in Redis, it is called a cache hit.
+Application -> Redis -> Data found -> Response
+
+Cache Miss:
+When requested data is not available in Redis, it is called a cache miss.
+Application -> Redis -> Data not found -> Database -> Redis -> Response
+
+============================================================
+7. WHAT ARE THE IMPORTANT FEATURES OF REDIS?
+============================================================
+The main features are:
+1. In-memory storage - provides very fast operations.
+2. Multiple data structures - String, Hash, List, Set, Sorted Set, etc.
+3. Persistence - Redis can save data to disk.
+4. Replication - data can be replicated to other Redis servers.
+5. Pub/Sub - Redis can be used for messaging.
+6. TTL/Expiration - keys can automatically expire after a specified time.
+7. High availability and scaling options through replication, Sentinel, and Redis Cluster.
+
+============================================================
+8. WHAT IS TTL IN REDIS?
+============================================================
+TTL stands for Time To Live. It defines how long a key should remain in Redis.
+After the TTL expires, Redis automatically removes the key.
+
+Example:
+SET user:101 "Kajol" EX 300
+This means the key expires after 300 seconds.
+
+Check TTL:
+TTL user:101
+
+Real-world example:
+OTP can be stored in Redis with a TTL of 5 minutes. After 5 minutes, it automatically expires.
+
+============================================================
+9. WHAT ARE THE REDIS DATA TYPES?
+============================================================
+Important Redis data types are:
+1. String - simple values, cache, counters
+2. Hash - object-like data
+3. List - ordered collection
+4. Set - unique values
+5. Sorted Set - ranking/leaderboard
+6. Bitmap - bit-level operations
+7. HyperLogLog - approximate unique counting
+
+============================================================
+10. WHAT IS REDIS STRING?
+============================================================
+String is the simplest and most commonly used Redis data type.
+It can store text, numbers, serialized JSON, and binary data.
+Commands:
+SET user:101 "Kajol"
+GET user:101
+
+For counters:
+SET count 10
+INCR count
+
+Real-world uses:
+- Cache API response
+- Store OTP
+- Store token
+- Counters
+
+============================================================
+11. WHAT IS REDIS HASH?
+============================================================
+Redis Hash stores multiple field-value pairs under one key. It is useful when we want to represent an object.
+
+Example:
+HSET user:101 name "Kajol"
+HSET user:101 age "28"
+HSET user:101 city "Pune"
+
+Retrieve one field:
+HGET user:101 name
+
+Retrieve all fields:
+HGETALL user:101
+
+Conceptually:
+user:101
+  name = Kajol
+  age = 28
+  city = Pune
+
+============================================================
+12. WHAT IS REDIS LIST?
+============================================================
+Redis List is an ordered collection of strings.
+We can add elements from the left or right side.
+Commands:
+LPUSH
+RPUSH
+LPOP
+RPOP
+LRANGE
+
+Real-world uses:
+- Queue
+- Recent activities
+- Message processing
+
+============================================================
+13. WHAT IS REDIS SET?
+============================================================
+A Redis Set is an unordered collection of unique values.
+Duplicate values are automatically ignored.
+
+Example:
+SADD users "Kajol"
+SADD users "Rahul"
+SADD users "Kajol"
+The second Kajol will not create a duplicate.
+
+Real-world use:
+- Unique visitors
+- Unique users
+- Tags
+
+============================================================
+14. WHAT IS REDIS SORTED SET?
+============================================================
+A Sorted Set is similar to a Set, but every element has a score. Redis uses the score to maintain the order.
+
+Example:
+ZADD leaderboard 100 "Rahul"
+ZADD leaderboard 200 "Kajol"
+ZADD leaderboard 150 "Amit"
+
+Here:
+Kajol -> 200
+Amit  -> 150
+Rahul -> 100
+
+Real-world use:
+- Gaming leaderboard
+- Ranking systems
+
+============================================================
+15. WHAT IS REDIS PERSISTENCE?
+============================================================
+Redis is primarily an in-memory data store, but it provides persistence mechanisms that allow data to be saved to disk.
+The two important mechanisms are:
+1. RDB
+2. AOF
+
+RDB: RDB takes snapshots of Redis data at particular intervals and stores them on disk.
+
+AOF: AOF records write operations so Redis can reconstruct the data after restart.
+
+Simple difference:
+RDB -> Snapshot
+AOF -> Write operations
+
+============================================================
+16. WHAT IS REDIS REPLICATION?
+============================================================
+Redis replication means copying data from one Redis server to another Redis server.
+Typically, we have a primary server and one or more replica servers.
+The primary handles writes and replicas maintain copies of the data.
+
+Architecture:
+Primary
+  |
+  +-- Replica 1
+  |
+  +-- Replica 2
+
+Benefits:
+- High availability
+- Read scaling
+- Redundancy
+
+============================================================
+17. WHAT IS REDIS PUB/SUB?
+============================================================
+Redis Pub/Sub is a messaging mechanism where one application publishes a message to a channel and other applications 
+subscribed to that channel receive the message.
+
+Architecture:
+Publisher
+   |
+   v
+Redis Channel
+   |
+   +-- Subscriber 1
+   +-- Subscriber 2
+   +-- Subscriber 3
+
+Example:
+PUBLISH notification "Order completed"
+Applications subscribed to the notification channel can receive the message.
+
+============================================================
+18. REDIS VS DATABASE
+============================================================
+Redis:
+- Primarily memory-based
+- Very fast
+- Commonly used for caching
+- Supports key-value and other data structures
+- Data can expire using TTL
+- Good for low-latency access
+
+Traditional Database:
+- Primarily disk-based
+- Designed for persistent business data
+- Supports complex queries
+- Relational databases support relationships and joins
+- Strong transactional capabilities
+
+Important:
+Redis does not necessarily replace a database. In many applications, Redis works as a caching layer while the database remains 
+the primary source of persistent business data.
+
+============================================================
+19. WHAT HAPPENS WHEN DATA IS NOT PRESENT IN REDIS?
+============================================================
+This is called a cache miss.
+Usually, the application retrieves the data from the database and then stores it in Redis for future requests.
+
+Flow:
+Request
+  |
+Redis
+  |
+Cache miss
+  |
+Database
+  |
+Store result in Redis
+  |
+Return response
+
+============================================================
+20. HOW DO YOU IMPLEMENT REDIS CACHING IN SPRING BOOT?
+============================================================
+In Spring Boot, we can use Spring Data Redis and Spring Cache abstraction.
+We configure the Redis connection and use annotations such as:
+
+@Cacheable
+@CachePut
+@CacheEvict
+
+Example:
+@Cacheable(value = "users", key = "#id")
+public User getUserById(Long id) {
+    return userRepository.findById(id).orElseThrow();
+}
+
+Explanation:
+When the method is called for the first time, the data is fetched from the database and stored in Redis.
+When the same ID is requested again, Spring checks the cache first and returns the cached data instead of calling the database.
+
+============================================================
+21. WHAT IS @Cacheable?
+============================================================
+@Cacheable is used to cache the result of a method.
+If the same method is called again with the same cache key, Spring returns the result from the cache instead of executing 
+the method again.
+
+Example:
+@Cacheable(value = "users", key = "#id")
+public User getUser(Long id) {
+    return userRepository.findById(id).orElseThrow();
+}
+
+Simple:
+@Cacheable -> Check cache first; execute method only if required.
+
+============================================================
+22. WHAT IS @CacheEvict?
+============================================================
+@CacheEvict is used to remove data from the cache.
+
+Example:
+@CacheEvict(value = "users", key = "#id")
+public void deleteUser(Long id) {
+    userRepository.deleteById(id);
+}
+
+Why?
+If the user is deleted or changed in the database, old data in Redis may become stale. 
+We can remove the corresponding cache entry.
+
+============================================================
+23. WHAT IS @CachePut?
+============================================================
+@CachePut always executes the method and updates the cache with the returned value.
+
+Example:
+@CachePut(value = "users", key = "#user.id")
+public User updateUser(User user) {
+    return userRepository.save(user);
+}
+
+Simple difference:
+@Cacheable -> Check cache first
+@CachePut  -> Execute method and update cache
+@CacheEvict -> Remove from cache
+
+============================================================
+24. WHAT IS CACHE INVALIDATION?
+============================================================
+Cache invalidation means removing or updating stale data from the cache when the original data changes.
+
+Example:
+Database:
+User name = Kajol
+
+Redis:
+User name = Kajol
+
+If the database changes to:
+User name = Anjali
+but Redis still contains Kajol, Redis has stale data.
+
+We need to update or remove the cache entry.
+
+============================================================
+25. WHAT ARE THE DISADVANTAGES OF REDIS?
+============================================================
+1. Redis primarily uses memory, so memory can become a limitation for large datasets.
+2. RAM is more expensive than disk storage.
+3. Cached data can become stale if it is not properly invalidated.
+4. Redis adds another component that needs to be monitored and managed.
+5. It is not designed to replace relational databases for every use case.
+6. Complex relational queries and joins are not its main strength.
+
+
+============================================================
+26. WHAT HAPPENS IF REDIS GOES DOWN?
+============================================================
+It depends on how Redis is being used.
+If Redis is only being used as a cache, the application can usually fall back to the database, although performance may decrease.
+For production systems, we can use replication, Sentinel, or Redis Cluster to improve availability.
+
+Good interview answer:
+If Redis is only a cache, its failure should not normally cause permanent data loss because the primary data is in the database. 
+However, the application should handle Redis failures gracefully.
+
+============================================================
+27. REDIS CLUSTER VS REPLICATION
+============================================================
+Replication creates copies of data on multiple Redis servers, mainly for availability and read scaling.
+
+Redis Cluster distributes data across multiple Redis nodes. It is mainly used for horizontal scaling and handling larger datasets.
+
+Replication:
+Primary -> Replica 1
+        -> Replica 2
+
+Cluster:
+Node 1 -> Part of data
+Node 2 -> Part of data
+Node 3 -> Part of data
+
+============================================================
+28. REDIS VS CONCURRENTHASHMAP
+============================================================
+ConcurrentHashMap is an in-memory data structure inside a single Java application instance.
+Redis is a separate data store that can be shared by multiple application instances.
+
+Example:
+Application 1 --Application 2 ----> Redis
+Application 3 --/
+
+With ConcurrentHashMap:
+Application 1 -> Its own ConcurrentHashMap
+Application 2 -> Different ConcurrentHashMap
+Application 3 -> Different ConcurrentHashMap
+
+Redis is useful when multiple application instances need to share the same cached data.
+
+============================================================
+29. WHAT IS REDIS SENTINEL?
+============================================================
+Redis Sentinel is used for monitoring Redis instances and improving high availability.
+It can monitor the primary, detect failures, and help perform automatic failover by promoting a replica when required.
+
+Simple:
+Sentinel -> Monitoring + Failure detection + Failover support
+
+
+============================================================
+30. WHAT HAPPENS WHEN REDIS MEMORY IS FULL?
+============================================================
+When Redis reaches its configured memory limit, its behavior depends on the configured eviction policy.
+
+Depending on the policy, Redis can:
+- Reject new writes
+- Remove older or less-used keys
+- Remove keys that have TTL
+- Use other configured eviction strategies
+
+For caching, eviction policies such as LRU or LFU can be useful.
+LRU means Least Recently Used.
+LFU means Least Frequently Used.
+
+============================================================
+31. WHAT IS CACHE EVICTION?
+============================================================
+Cache eviction means removing keys from Redis when memory is limited or when the configured policy requires removal.
+
+Common policies include:
+- LRU - remove least recently used keys
+- LFU - remove least frequently used keys
+- TTL-based expiration
+- No eviction / reject writes depending on configuration
+
+Simple:
+Eviction is the process of removing cache data to free memory.
+
+============================================================
+32. HOW DO YOU PREVENT STALE CACHE DATA?
+============================================================
+We can prevent stale data by:
+1. Setting an appropriate TTL.
+2. Evicting the cache when data is updated or deleted.
+3. Updating the cache after database updates.
+4. Using a proper cache invalidation strategy.
+5. Designing cache keys carefully.
+
+Example:
+Database update
+      |
+      +--> Update Redis
+or
+      |
+      +--> Evict Redis key
+
+============================================================
+33. HOW DO YOU CHOOSE A REDIS KEY?
+============================================================
+Redis keys should be meaningful, unique, consistent, and easy to understand.
+
+Examples:
+users:101
+product:5001
+order:10001
+A good key makes cache management and debugging easier.
+
+============================================================
+34. HOW DO YOU HANDLE CACHE FAILURE?
+============================================================
+If Redis is being used as a cache, the application should be able to fall back to the primary database when possible.
+
+We should also:
+- Handle Redis connection failures
+- Configure timeouts
+- Monitor Redis
+- Use replication/high availability where required
+- Avoid making Redis a single point of failure
+
+Example:
+Application -> Redis
+              |
+              +-- Available -> Return cached data
+              |
+              +-- Failed -> Try database if appropriate
+
+============================================================
+35. CAN REDIS BE USED AS A PRIMARY DATABASE?
+============================================================
+Yes. Redis can be used as a primary database when the application's data model and requirements fit Redis.
+
+It can be appropriate when:
+- Very low latency is required
+- Data fits the Redis data model
+- The dataset can fit comfortably in memory
+- Complex relational queries are not required
+- Persistence and high availability are configured appropriately
+But for many business applications, MySQL/PostgreSQL is a better primary database and Redis is used as a cache.
+
+============================================================
+36. HOW WOULD YOU CACHE AN API RESPONSE?
+============================================================
+Suppose we have:
+GET /users/101
+
+Flow:
+1. Request comes to the application.
+2. Application checks Redis using a key such as users:101.
+3. If data exists, return it from Redis. This is a cache hit.
+4. If data does not exist, query the database. This is a cache miss.
+5. Store the result in Redis with an appropriate TTL.
+6. Return the response.
+
+Flow:
+API Request
+    |
+    v
+Redis
+    |
+    +-- Hit --> Return response
+    |
+    +-- Miss
+          |
+          v
+       Database
+          |
+          v
+        Redis
+          |
+          v
+       Response
+
+
+============================================================
+37. WHAT IS THE DIFFERENCE BETWEEN RDB AND AOF?
+============================================================
+RDB:
+- Stores snapshots of Redis data.
+- Good for compact backups.
+- Usually supports faster restart.
+- May lose changes made after the latest snapshot if Redis fails before another snapshot.
+
+AOF:
+- Records write operations.
+- Can provide better durability depending on the configured fsync policy.
+- The file can become larger than an RDB snapshot.
+- Redis can replay the recorded operations during recovery.
+
+Simple:
+RDB -> Snapshot of data
+AOF -> Record of write operations
+
+============================================================
+38. WHAT IS THE DIFFERENCE BETWEEN SET AND SORTED SET?
+============================================================
+Set:
+- Stores unique values.
+- No score.
+- Unordered.
+
+Sorted Set:
+- Stores unique members.
+- Each member has a score.
+- Members can be retrieved according to their score.
+
+Example:
+Set: users = {101, 102, 103}
+
+Sorted Set:
+leaderboard:
+Kajol -> 200
+Amit  -> 150
+Rahul -> 100
+
+============================================================
+39. WHAT IS THE DIFFERENCE BETWEEN STRING AND HASH?
+============================================================
+String: Stores one value against a key.
+Example: SET user:101 "Kajol"
+
+Hash: Stores multiple field-value pairs under one key.
+Example:
+HSET user:101 name "Kajol"
+HSET user:101 age "28"
+HSET user:101 city "Pune"
+
+Use String for simple values and Hash when you want to represent multiple fields of an object.
+
+============================================================
+40. WHAT IS THE DIFFERENCE BETWEEN REDIS AND MYSQL/POSTGRESQL?
+============================================================
+Redis is primarily an in-memory data structure store optimized for very fast access.
+MySQL/PostgreSQL are traditional relational databases designed for persistent structured data, complex queries, 
+relationships, joins, and transactional workloads.
+
+Common architecture:
+Application
+    |
+    +---- Redis (Cache)
+    |
+    +---- MySQL/PostgreSQL (Primary Database)
+
+Redis improves speed, while the relational database usually remains the source of truth.
+
+============================================================
+41. WHAT IS A GOOD REAL-WORLD REDIS USE CASE?
+============================================================
+One common use case is caching frequently accessed user or product information.
+
+Example:
+GET /products/101
+
+First request:
+Application -> Redis -> Cache Miss -> Database -> Redis
+
+Later requests:
+Application -> Redis -> Cache Hit -> Response
+
+This reduces database queries and improves response time.
+Other examples:
+- OTP
+- Session data
+- Rate limiting
+- Counters
+- Leaderboards
+- Frequently accessed configuration
+- Real-time data
+
+
+============================================================
+42. HOW WOULD YOU EXPLAIN REDIS ARCHITECTURE IN AN INTERVIEW?
+============================================================
+                 Application
+                      |
+                      v
+                Redis Primary
+                  /                        /                         v           v
+           Replica 1    Replica 2
+
+The application communicates with Redis. The primary can handle writes, while replicas maintain copies of the data.
+For larger systems, Redis Cluster can distribute data across multiple nodes.
+Use the terminology: Primary/Replica
+instead of: Master/Slave
+
+============================================================
+43. HOW WOULD YOU EXPLAIN REDIS IN A SPRING BOOT PROJECT?
+============================================================
+Redis was used as a caching layer in our Spring Boot application. We used it to store frequently accessed data so that we didn't 
+have to query the database for every request.
+When a request came in, we first checked Redis. If the data was available, it was a cache hit and we returned it directly. 
+If the data was not available, it was a cache miss, so we fetched the data from the database, stored it in Redis with an 
+appropriate TTL, and returned the response.
+When the underlying data was updated or deleted, we updated or evicted the corresponding cache entry to avoid stale data."
+
+============================================================
+45. QUICK REVISION SHEET
+============================================================
+
+Redis:
+In-memory data structure store used as database, cache, and message broker.
+
+Why fast:
+Primarily stores data in memory + efficient data structures.
+
+Common use:
+Caching frequently accessed data.
+
+Cache Hit:
+Data found in Redis.
+
+Cache Miss:
+Data not found in Redis.
+
+TTL:
+Time To Live; automatically expires a key.
+
+String:
+Simple value.
+
+Hash:
+Field-value pairs / object-like data.
+
+List:
+Ordered collection.
+
+Set:
+Unique values.
+
+Sorted Set:
+Unique values + score/order.
+
+RDB:
+Snapshot persistence.
+
+AOF:
+Records write operations.
+
+Replication:
+Copies data from primary to replicas.
+
+Pub/Sub:
+Publisher sends messages to subscribers through channels.
+
+@Cacheable:
+Check cache first.
+
+@CachePut:
+Execute method and update cache.
+
+@CacheEvict:
+Remove cache entry.
+
+Cache Invalidation:
+Remove/update stale cache data.
+
+Redis Cluster:
+Distributes data across nodes for scaling.
+
+Redis Sentinel:
+Monitoring and failover support.
+
+Redis vs ConcurrentHashMap:
+ConcurrentHashMap is local to a Java application instance; Redis can be shared by multiple application instances.
+
+Redis vs Database:
+Redis is optimized for fast access; relational databases are better suited for complex queries, relationships, and traditional persistent transactional workloads.
+
+Best project answer:
+Use Redis as a caching layer, check Redis first, fetch from DB on cache miss, store result with TTL, and invalidate/update cache when underlying data changes.
