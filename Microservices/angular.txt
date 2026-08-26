@@ -1,0 +1,108 @@
+1. What is Angular? How is it different from AngularJS?
+============================================================
+Angular is a TypeScript-based front-end framework for building single-page applications (SPA). 
+AngularJS (version 1) was JavaScript-based and used controllers/$scope, while Angular (version 2+) is component-based, faster, and uses TypeScript.
+
+2. What are Components in Angular?
+=======================================
+A component controls a part of the screen (a view). It has a .ts file (logic), .html file (template), 
+and .css file (styling), tied together using the @Component decorator.
+
+3. What is a Module (NgModule)?
+===============================
+A module is a container that groups related components, directives, pipes, and services together. 
+Every Angular app has at least one root module — AppModule.
+
+4. What is Data Binding? What types are there?
+==============================================
+Data binding connects the component (TS) with the template (HTML). Types:
+Interpolation {{ value }} — one-way, component to view
+Property binding [property]="value" — one-way, component to view
+Event binding (click)="onClick()" — one-way, view to component
+Two-way binding [(ngModel)]="value" — both directions
+
+5. What is the difference between Component and Directive?
+===========================================================
+A component has its own template (HTML), while a directive adds behavior to an existing element without its own template. 
+Components are actually a type of directive with a view.
+
+6. What are the types of Directives?
+====================================
+Component directives (has a template)
+Structural directives — change DOM structure, e.g. *ngIf, *ngFor, *ngSwitch
+Attribute directives — change appearance/behavior, e.g. ngClass, ngStyle
+
+7. What is *ngIf vs [hidden]?
+==============================
+*ngIf completely adds/removes the element from the DOM based on condition. 
+[hidden] keeps the element in the DOM but just hides it using CSS (display:none).
+
+8. What is *ngFor?
+====================
+Used to loop over a list/array and render an element for each item. 
+Example: <li *ngFor="let item of items">{{item}}</li>
+
+9. What are Services and Dependency Injection (DI)?
+====================================================
+A service is a class used to share logic/data (like API calls) across components, so we don't repeat code. 
+DI is the mechanism Angular uses to provide an instance of that service wherever it's needed, instead of the component creating it manually.
+
+10. What is @Input() and @Output()?
+======================================
+@Input() — passes data from a parent component to a child component
+@Output() — sends data/events from a child component back to the parent, using EventEmitter
+
+11. What is Angular Lifecycle Hooks? Name a few.
+=====================================================
+Lifecycle hooks are methods Angular calls at specific points in a component's life. Commonly asked ones:
+ngOnInit() — called once, right after the component is initialized (most used for API calls)
+ngOnChanges() — called when an @Input() value changes
+ngOnDestroy() — called just before the component is removed (used for cleanup, like unsubscribing)
+
+12. What is the difference between ngOnInit() and Constructor?
+==============================================================
+Constructor is a TypeScript feature, used mainly for dependency injection. 
+ngOnInit() is an Angular hook, used to write initialization logic (like calling an API) once the component's inputs are ready.
+
+13. What are Pipes? Give an example.
+=====================================
+Pipes transform how data is displayed in the template without changing the actual data. 
+Example: {{ price | currency }} or {{ name | uppercase }}. Common built-in pipes: date, currency, uppercase, lowercase, json.
+
+14. What is Routing in Angular?
+================================
+Routing lets you navigate between different views/components without reloading the whole page, based on the URL. 
+Configured using RouterModule and a routes array (path + component mapping).
+
+15. What is a Route Guard?
+===========================
+A guard controls whether a user is allowed to navigate to/away from a route. 
+Example: CanActivate is used to block access to a page if the user is not logged in.
+
+16. What is the difference between Observable and Promise?
+============================================================
+Promise handles a single value and cannot be cancelled once called.
+Observable (from RxJS) can emit multiple values over time, can be cancelled (unsubscribed), 
+and supports operators like map, filter. Angular's HttpClient returns Observables.
+
+17. How do you make an HTTP call in Angular?
+==============================================
+Using the HttpClient service (imported from @angular/common/http), typically inside a service:
+typescript
+getUsers(): Observable<User[]> {
+  return this.http.get<User[]>('https://api.example.com/users');
+}
+
+18. What is async pipe?
+========================
+It automatically subscribes to an Observable/Promise in the template and unsubscribes automatically when the component is destroyed — 
+avoids manual subscribe()/unsubscribe() calls in the component class.
+
+19. What is the difference between Reactive Forms and Template-driven Forms?
+==============================================================================
+Template-driven forms — logic mostly in HTML, uses ngModel, simpler, good for basic forms
+Reactive forms — logic defined in the TS file using FormGroup/FormControl, more scalable, better for complex validation and dynamic forms
+
+20. What is Angular CLI? Name a few common commands.
+====================================================
+Angular CLI is a command-line tool to create and manage Angular projects. Common commands: ng new, ng generate component, ng serve, ng build, ng test.
